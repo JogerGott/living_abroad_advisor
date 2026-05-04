@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#004a23",
+                    "on-primary-fixed-variant": "#003461",
+                    "secondary": "#a63300",
+                    "on-secondary-fixed": "#631b00",
+                    "primary-dim": "#005192",
+                    "on-primary-container": "#002b52",
+                    "on-background": "#1e3042",
+                    "primary-fixed-dim": "#599ef1",
+                    "surface-container": "#d9eaff",
+                    "inverse-surface": "#000f1e",
+                    "secondary-fixed-dim": "#ffb197",
+                    "surface-bright": "#f2f7ff",
+                    "surface-container-highest": "#c4e0ff",
+                    "outline-variant": "#9cafc5",
+                    "outline": "#66798d",
+                    "inverse-on-surface": "#8c9fb4",
+                    "tertiary": "#006a35",
+                    "on-primary-fixed": "#000c1e",
+                    "secondary-fixed": "#ffc4b2",
+                    "on-tertiary-fixed-variant": "#006a35",
+                    "on-error-container": "#570008",
+                    "on-surface": "#1e3042",
+                    "primary": "#005da7",
+                    "surface-variant": "#c4e0ff",
+                    "inverse-primary": "#68abff",
+                    "surface-container-low": "#e8f2ff",
+                    "tertiary-container": "#6bfe9c",
+                    "on-error": "#ffefee",
+                    "on-surface-variant": "#4b5d70",
+                    "primary-container": "#68abff",
+                    "secondary-dim": "#922c00",
+                    "secondary-container": "#ffc4b2",
+                    "error-dim": "#9f0519",
+                    "tertiary-fixed-dim": "#5bef90",
+                    "on-secondary-container": "#842700",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f2f7ff",
+                    "surface-container-high": "#cee5ff",
+                    "on-tertiary-container": "#005f2f",
+                    "on-secondary": "#ffefeb",
+                    "background": "#f2f7ff",
+                    "error-container": "#fb5151",
+                    "surface-tint": "#005da7",
+                    "primary-fixed": "#68abff",
+                    "surface-dim": "#bad7f8",
+                    "on-primary": "#eef3ff",
+                    "tertiary-dim": "#005c2d",
+                    "on-secondary-fixed-variant": "#942d00",
+                    "error": "#b31b25",
+                    "on-tertiary": "#cdffd4",
+                    "tertiary-fixed": "#6bfe9c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Be Vietnam Pro"],
+                    "label": ["Be Vietnam Pro"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .plusJakartaSans { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .beVietnamPro { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Off-Canvas Drawer Styles */
+        #nav-drawer {
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #nav-drawer.open {
+            transform: translateX(0);
+        }
+        #nav-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #nav-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Dropdown Animation */
+        .submenu-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .submenu-trigger:hover + .submenu-container,
+        .submenu-container:hover {
+            max-height: 500px;
+        }
+        .submenu-trigger:hover .dropdown-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface beVietnamPro overflow-x-hidden">
+<!-- Overlay for Off-Canvas -->
+<div class="fixed inset-0 z-[150] bg-[#1e3042]/40 backdrop-blur-sm" id="nav-overlay" onclick="toggleNav()"></div>
+<!-- Off-Canvas Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-80 z-[200] bg-[#f2f7ff] dark:bg-[#1e3042] flex flex-col py-8 px-6 shadow-[12px_0px_32px_rgba(30,48,66,0.15)]" id="nav-drawer">
+<div class="mb-12 flex items-center justify-between">
+<div class="plusJakartaSans font-bold -tracking-[0.02em] flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div>
+<h1 class="text-xl font-black text-[#1e3042] dark:text-white leading-tight">Travel Helper</h1>
+<p class="text-[0.7rem] uppercase tracking-widest text-primary opacity-80">by ASCENT</p>
+</div>
+</div>
+<button class="md:hidden material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" onclick="toggleNav()">close</button>
+</div>
+<nav class="flex-1 space-y-2 overflow-y-auto no-scrollbar">
+<!-- Home -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="plusJakartaSans font-bold">Home</span>
+</a>
+<!-- Destinations Group -->
+<div class="group">
+<button class="submenu-trigger w-full flex items-center justify-between px-4 py-3 rounded-xl text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 transition-all duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined">explore</span>
+<span class="plusJakartaSans font-bold">Destinations</span>
+</div>
+<span class="material-symbols-outlined dropdown-icon transition-transform duration-300 text-sm">expand_more</span>
+</button>
+<div class="submenu-container bg-[#e8f2ff] dark:bg-slate-800/50 rounded-xl mt-1 space-y-1">
+<a class="flex items-center gap-4 px-8 py-3 rounded-xl text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold text-sm">Colombia</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 rounded-xl text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold text-sm">USA</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 rounded-xl text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold text-sm">Brazil</span>
+</a>
+<!-- ACTIVE: France -->
+<a class="flex items-center gap-4 px-8 py-3 rounded-xl text-[#005da7] dark:text-[#68abff] font-bold border-l-4 border-[#005da7] bg-white/50 dark:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold text-sm">France</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 rounded-xl text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold text-sm">Germany</span>
+</a>
+<a class="flex items-center gap-4 px-8 py-3 rounded-xl text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold text-sm">China</span>
+</a>
+</div>
+</div>
+</nav>
+</aside>
+<!-- TopAppBar (Sticky Header) -->
+<header class="fixed top-0 w-full z-50 bg-[#f2f7ff]/80 dark:bg-[#1e3042]/80 backdrop-blur-[20px] flex justify-between items-center h-16 px-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors text-primary" onclick="toggleNav()">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<span class="text-lg font-black tracking-tighter text-[#1e3042] dark:text-white plusJakartaSans">Travel Helper</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-[#68abff]">language</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-16 min-h-screen">
+<!-- Hero Section -->
+<section class="relative h-[614px] flex items-center justify-center overflow-hidden bg-surface-container">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-80" data-alt="cinematic wide shot of the Eiffel Tower and Parisian skyline at dusk with warm golden lighting and soft purple clouds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcIglj_BzjXilh6dGM-PdMXWzYKEttgL3Ux5FAh0yyaBQjU_RwM5qRSJMOwKzUuo1biFYo6OHo2x2FXXi0a1gQryKcoJz4d3MnDbngC1_nmRQTlS2-xcLp1kb0fF_oUjpfDQO2XzqGItfv7ax0TJJPOHU7CI3H6nnT9F1UjMiwbLew4Um-j3m9t_Nwj6rA9cjOza_xbTzmRuQqkL26rZe6BpKuPUxbNINdPJ5ZpVxg4JhWheEAu3ynLBBXtX5vafPRf1oTXOgIgvk"/>
+<div class="absolute inset-0 bg-gradient-to-b from-primary/20 to-surface"></div>
+</div>
+<div class="relative z-10 text-center">
+<span class="label-md text-secondary tracking-widest uppercase font-bold text-xs bg-white/40 backdrop-blur-md px-4 py-1 rounded-full mb-4 inline-block">Destination Spotlight</span>
+<h1 class="text-[3.5rem] md:text-[5rem] font-extrabold plusJakartaSans text-on-surface leading-none -tracking-[0.04em]">FRANCE 🇫🇷</h1>
+<p class="mt-4 text-xl font-medium opacity-80 max-w-xl mx-auto px-6">Explore the heart of European culture, from the lights of Paris to the lavender fields of Provence.</p>
+</div>
+</section>
+<!-- Flight Path Visualizer -->
+<section class="py-12 px-6 md:px-12 bg-white/40">
+<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 py-8 px-12 rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="text-center md:text-left">
+<span class="text-xs uppercase font-bold text-outline">Origin</span>
+<h3 class="text-2xl font-bold text-primary">Global Hubs</h3>
+</div>
+<div class="flex-1 w-full relative flex items-center px-4">
+<div class="w-full border-t-2 border-dashed border-primary-container h-0 relative">
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-2 rounded-full border border-primary-container shadow-md">
+<span class="material-symbols-outlined text-primary scale-125 transform rotate-90">flight</span>
+</div>
+</div>
+</div>
+<div class="text-center md:text-right">
+<span class="text-xs uppercase font-bold text-outline">Destination</span>
+<h3 class="text-2xl font-bold text-primary">Paris (CDG)</h3>
+</div>
+</div>
+</section>
+<!-- Culture Shocks Bento Grid -->
+<section class="py-20 px-6 md:px-12">
+<div class="max-w-6xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div class="max-w-2xl">
+<span class="text-secondary font-bold text-[0.75rem] uppercase tracking-widest">Etiquette &amp; Vibes</span>
+<h2 class="text-3xl md:text-4xl font-extrabold plusJakartaSans -tracking-[0.02em] text-on-surface mt-2">Culture Shocks to Expect</h2>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+<!-- Greeting Card -->
+<div class="p-8 rounded-xl bg-primary text-on-primary flex flex-col justify-between h-80 hover:scale-[1.02] transition-all duration-300 shadow-lg">
+<div>
+<span class="material-symbols-outlined text-4xl mb-4">chat_bubble</span>
+<h3 class="text-2xl font-bold mb-3">Bonjour is Non-Negotiable</h3>
+<p class="opacity-80 leading-relaxed">Always start every interaction—be it in a shop or cafe—with a clear "Bonjour". It's the key that unlocks French hospitality.</p>
+</div>
+<div class="text-4xl font-black opacity-20 self-end italic">01</div>
+</div>
+<!-- Lunch Breaks -->
+<div class="p-8 rounded-xl bg-surface-container-highest text-on-surface flex flex-col justify-between h-80 hover:scale-[1.02] transition-all duration-300">
+<div>
+<span class="material-symbols-outlined text-4xl text-primary mb-4">restaurant</span>
+<h3 class="text-2xl font-bold mb-3">Sacred Lunch Hours</h3>
+<p class="text-on-surface-variant leading-relaxed">Everything slows down between 12:00 and 14:00. Many smaller shops close entirely as lunch is a strictly observed social ritual.</p>
+</div>
+<div class="text-4xl font-black opacity-10 self-end italic">02</div>
+</div>
+<!-- Customer Service -->
+<div class="p-8 rounded-xl bg-white border border-outline-variant/15 flex flex-col justify-between h-80 hover:scale-[1.02] transition-all duration-300">
+<div>
+<span class="material-symbols-outlined text-4xl text-secondary mb-4">support_agent</span>
+<h3 class="text-2xl font-bold mb-3">Service is 'Discreet'</h3>
+<p class="text-on-surface-variant leading-relaxed">The customer is not always 'King'. Waiters won't check on you every 5 minutes—they value your privacy and peace while dining.</p>
+</div>
+<div class="text-4xl font-black opacity-10 self-end italic">03</div>
+</div>
+<!-- Fashion -->
+<div class="p-8 rounded-xl bg-secondary text-white flex flex-col justify-between h-80 hover:scale-[1.02] transition-all duration-300">
+<div>
+<span class="material-symbols-outlined text-4xl mb-4">styler</span>
+<h3 class="text-2xl font-bold mb-3">Effortless Elegance</h3>
+<p class="opacity-80 leading-relaxed">Parisians value presentation. While not everyone is in a suit, 'athleisure' is rarely seen in the city center restaurants or theaters.</p>
+</div>
+<div class="text-4xl font-black opacity-20 self-end italic">04</div>
+</div>
+<!-- Sunday Closure (Span 2) -->
+<div class="md:col-span-2 p-10 rounded-xl bg-[#1e3042] text-white flex flex-col md:flex-row items-center gap-8 hover:scale-[1.01] transition-all duration-300">
+<div class="flex-1">
+<span class="material-symbols-outlined text-5xl text-primary-container mb-4">event_busy</span>
+<h3 class="text-3xl font-bold mb-4">The Sunday Shutdown</h3>
+<p class="text-white/70 text-lg leading-relaxed">Sunday is for family and rest. Major supermarkets, boulangeries (after noon), and boutiques will likely be shuttered. Plan your supplies accordingly!</p>
+</div>
+<div class="w-full md:w-64 h-48 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="quiet cobblestone street in a French village with closed wooden shutters on a sunny afternoon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGolhAOPBl56CFhQ0UrFUsWVXReT3cKW6nYCIf3PX3XJosAlp1kS2cS45tljDRWmOp7kURz3aHKTXCoGCdVU8tYt1x5O_aJRNeh9R1dVxf6Cbhrq0VBvTKDIB4OLNhG-ygNM3GM6grCyc782DR0BleLPtb1U7Olb9BxCQ8Sz5hNnBGKbtvmFPwTzznpKyPL70-T_l0FZgp0hhWSCKAqwPWHir6jKHBEkk8xaMMEU4PMws8O933Tpc1epUTw_2OkikDqoyum-6aeSc"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Video Carousel Section -->
+<section class="py-20 bg-surface-container-low overflow-hidden">
+<div class="px-6 md:px-12 max-w-6xl mx-auto mb-10">
+<span class="text-primary font-bold text-[0.75rem] uppercase tracking-widest">Visual Journeys</span>
+<h2 class="text-3xl font-extrabold plusJakartaSans mt-2">Cinematic France</h2>
+</div>
+<div class="flex gap-6 px-6 md:px-12 overflow-x-auto pb-8 snap-x no-scrollbar">
+<!-- Video 1 -->
+<div class="shrink-0 w-[85vw] md:w-[450px] snap-center">
+<div class="relative rounded-xl overflow-hidden group">
+<img class="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Paris cityscape featuring Sacre-Coeur and Montmartre district at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCltdXvfAeMGrv2AZcudZc3mEUo7RlY1CYIW_peYdm6pZTEdOWaz6vtxvJlx_OP2d83A-fZ2VMKgbyX_g1wuwpIgIz74tZkrUu2nby3pQlt1KB9LCwh_9m0IhCJ8QzfiFp09SDUIOGdlFfzbvdcIPUd0FtFtNKzli8htOlKaAwgVsHjAIyLYDDoaIlLbnvO0ghUe0ef3aiydpyaiNsSr526M6vt9gEk_EHsh8LXqgZgAvsOOlOiWfV5JB2Fai50HWr3XyTc_bdKwLQ"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/80 to-transparent">
+<h4 class="text-white font-bold text-lg">Paris: The Hidden Gems</h4>
+<p class="text-white/60 text-sm">A 4K walking tour of the 18th Arrondissement.</p>
+</div>
+</div>
+</div>
+<!-- Video 2 -->
+<div class="shrink-0 w-[85vw] md:w-[450px] snap-center">
+<div class="relative rounded-xl overflow-hidden group">
+<img class="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500" data-alt="vibrant lavender fields in Provence stretching towards the horizon under a clear blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaR9seZDOTW0YNivYbeDR_xa3MTDNGZqKBs18lvYia03B1ic0jAHYn9BBsNVougDNowj-eIdV1WVaI-QDsH3zri45zeCtoHTHyRZ-stQ4jRkX5sIjeWbmpqElAAmAZr73hV1xdTnGWmiGxI4lcrIFp6w23MFiKvOSb9FP9yC4O57LSPhccwerP3HfhETAorH_lmpi3QcpetD8-CYZ29PGj47vZCDTtvJRvaLyJmigogvLQ6eMIv-8X5Y8LVvWfYdduVT3pNyUGKo4"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/80 to-transparent">
+<h4 class="text-white font-bold text-lg">Provence in Bloom</h4>
+<p class="text-white/60 text-sm">Discovering the scents and sights of Southern France.</p>
+</div>
+</div>
+</div>
+<!-- Video 3 -->
+<div class="shrink-0 w-[85vw] md:w-[450px] snap-center">
+<div class="relative rounded-xl overflow-hidden group">
+<img class="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500" data-alt="luxury yacht sailing in the deep blue waters of the French Riviera near Nice" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASFN4E2i1KeUA1zpQdFAPQu7h5n9ObJHpCQvTUiL_Cf7ImYN1TnMtyQcTyfVzUvGabgplG9Ip9LJcx9sXpg1bYEMheTBvqXiNtNpoxLZYnf5XaK0ZuznPmHCu3A4GF274_I0LuTFd32bjHovwcEcZfR2gtQ3Ck9ej3WwbZiKRy7YuEKLu4oHcPqTlDHRWp_kdsffYT82QVuug5GdJ4wgyCOgLZEmsyuV3Xbe-k20uS0pzStJ5s-R4D1GZjgHPGUzTGHKichNV-XxU"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 w-full bg-gradient-to-t from-black/80 to-transparent">
+<h4 class="text-white font-bold text-lg">Côte d'Azur Luxury</h4>
+<p class="text-white/60 text-sm">The best of the French Riviera lifestyle.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Slang Grid Section -->
+<section class="py-20 px-6 md:px-12 bg-surface">
+<div class="max-w-6xl mx-auto text-center mb-16">
+<span class="text-secondary font-bold text-[0.75rem] uppercase tracking-widest">Local Communication</span>
+<h2 class="text-3xl md:text-5xl font-extrabold plusJakartaSans mt-4">Speak Like a Local</h2>
+<p class="mt-4 text-on-surface-variant max-w-2xl mx-auto">Master these 20 French slang terms to blend in with the locals at any brasserie.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<!-- Slang items -->
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary">Oula</span>
+<span class="text-xs text-on-surface-variant">Oops / Watch out</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-secondary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-secondary">C'est top</span>
+<span class="text-xs text-on-surface-variant">That's great</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-tertiary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-tertiary">Bof</span>
+<span class="text-xs text-on-surface-variant">Meh / Not really</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-on-surface transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-on-surface">Mec</span>
+<span class="text-xs text-on-surface-variant">Guy / Dude</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary-container transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary-container">Meuf</span>
+<span class="text-xs text-on-surface-variant">Girl / Chick</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary">Ça roule</span>
+<span class="text-xs text-on-surface-variant">It's going well</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-secondary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-secondary">Nickel</span>
+<span class="text-xs text-on-surface-variant">Perfect</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-tertiary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-tertiary">Pas de souci</span>
+<span class="text-xs text-on-surface-variant">No worries</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-on-surface transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-on-surface">Un truc</span>
+<span class="text-xs text-on-surface-variant">A thing</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary-container transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary-container">Pote</span>
+<span class="text-xs text-on-surface-variant">Buddy</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary">Relou</span>
+<span class="text-xs text-on-surface-variant">Annoying</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-secondary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-secondary">Vachement</span>
+<span class="text-xs text-on-surface-variant">Very / Truly</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-tertiary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-tertiary">Trop</span>
+<span class="text-xs text-on-surface-variant">Too much / Very</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-on-surface transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-on-surface">Kiffer</span>
+<span class="text-xs text-on-surface-variant">To like / enjoy</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary-container transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary-container">Genre</span>
+<span class="text-xs text-on-surface-variant">Like / Kind of</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary">Naze</span>
+<span class="text-xs text-on-surface-variant">Lame / Useless</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-secondary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-secondary">Ouais</span>
+<span class="text-xs text-on-surface-variant">Yeah</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-tertiary transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-tertiary">Chouette</span>
+<span class="text-xs text-on-surface-variant">Cool / Nice</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-on-surface transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-on-surface">Zéro</span>
+<span class="text-xs text-on-surface-variant">Rubbish</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-high border-b-4 border-primary-container transition-transform hover:-translate-y-1">
+<span class="text-xl font-black block text-primary-container">Bosser</span>
+<span class="text-xs text-on-surface-variant">To work</span>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 bg-[#e8f2ff] dark:bg-[#1e3042] border-t border-[#9cafc5]/15 flex flex-col items-center gap-4">
+<div class="flex flex-col items-center gap-2">
+<span class="font-bold text-[#1e3042] dark:text-white text-lg">Travel Helper</span>
+<p class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#a63300]">Powered by ASCENT 🏔️</p>
+</div>
+<div class="flex gap-8 mt-4">
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Terms of Service</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Privacy Policy</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Contact</a>
+</div>
+</footer>
+</main>
+<script>
+    function toggleNav() {
+        const drawer = document.getElementById('nav-drawer');
+        const overlay = document.getElementById('nav-overlay');
+        const isOpen = drawer.classList.contains('open');
+
+        if (isOpen) {
+            drawer.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.classList.remove('overflow-hidden');
+        } else {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            document.body.classList.add('overflow-hidden');
+        }
+    }
+</script>
+</body></html>

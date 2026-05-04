@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Travel Helper - Culture Shocks</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#004a23",
+                        "on-primary-fixed-variant": "#003461",
+                        "secondary": "#a63300",
+                        "on-secondary-fixed": "#631b00",
+                        "primary-dim": "#005192",
+                        "on-primary-container": "#002b52",
+                        "on-background": "#1e3042",
+                        "primary-fixed-dim": "#599ef1",
+                        "surface-container": "#d9eaff",
+                        "inverse-surface": "#000f1e",
+                        "secondary-fixed-dim": "#ffb197",
+                        "surface-bright": "#f2f7ff",
+                        "surface-container-highest": "#c4e0ff",
+                        "outline-variant": "#9cafc5",
+                        "outline": "#66798d",
+                        "inverse-on-surface": "#8c9fb4",
+                        "tertiary": "#006a35",
+                        "on-primary-fixed": "#000c1e",
+                        "secondary-fixed": "#ffc4b2",
+                        "on-tertiary-fixed-variant": "#006a35",
+                        "on-error-container": "#570008",
+                        "on-surface": "#1e3042",
+                        "primary": "#005da7",
+                        "surface-variant": "#c4e0ff",
+                        "inverse-primary": "#68abff",
+                        "surface-container-low": "#e8f2ff",
+                        "tertiary-container": "#6bfe9c",
+                        "on-error": "#ffefee",
+                        "on-surface-variant": "#4b5d70",
+                        "primary-container": "#68abff",
+                        "secondary-dim": "#922c00",
+                        "secondary-container": "#ffc4b2",
+                        "error-dim": "#9f0519",
+                        "tertiary-fixed-dim": "#5bef90",
+                        "on-secondary-container": "#842700",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f2f7ff",
+                        "surface-container-high": "#cee5ff",
+                        "on-tertiary-container": "#005f2f",
+                        "on-secondary": "#ffefeb",
+                        "background": "#f2f7ff",
+                        "error-container": "#fb5151",
+                        "surface-tint": "#005da7",
+                        "primary-fixed": "#68abff",
+                        "surface-dim": "#bad7f8",
+                        "on-primary": "#eef3ff",
+                        "tertiary-dim": "#005c2d",
+                        "on-secondary-fixed-variant": "#942d00",
+                        "error": "#b31b25",
+                        "on-tertiary": "#cdffd4",
+                        "tertiary-fixed": "#6bfe9c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .editorial-shadow {
+            box-shadow: 0px 12px 32px rgba(30, 48, 66, 0.08);
+        }
+
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(242, 247, 255, 0.8);
+        }
+
+        .adventure-gradient {
+            background: linear-gradient(135deg, #005da7 0%, #68abff 100%);
+        }
+
+        .out-back-transition {
+            transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .pin-pulse::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 9999px;
+            background: #5bef90;
+            opacity: 0.3;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        /* Drawer Logic */
+        #nav-drawer {
+            transform: translateX(-100%);
+            transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #nav-drawer.open {
+            transform: translateX(0);
+        }
+
+        #drawer-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 300ms ease, visibility 300ms ease;
+        }
+
+        #drawer-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body text-on-surface selection:bg-secondary-container">
+    <!-- Overlay for Off-Canvas -->
+    <div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-[90]" id="drawer-overlay" onclick="toggleDrawer()">
+    </div>
+    <!-- Top Navigation Shell -->
+    <nav
+        class="fixed top-0 w-full z-50 flex justify-between items-center h-16 px-6 md:px-12 bg-[#f2f7ff]/80 dark:bg-[#1e3042]/80 backdrop-blur-[20px]">
+        <div class="flex items-center gap-4">
+            <!-- Hamburger Menu Button -->
+            <button
+                class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors"
+                onclick="toggleDrawer()">
+                <span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+            </button>
+            <div class="flex flex-col">
+                <span
+                    class="text-lg font-black tracking-tighter text-[#1e3042] dark:text-white font-headline leading-tight">Travel
+                    Helper</span>
+                <span class="text-[0.6rem] uppercase tracking-widest font-bold opacity-60">by ASCENT</span>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-8 text-[#1e3042] dark:text-slate-300 font-headline">
+            <a class="text-[#005da7] dark:text-[#68abff] font-bold" href="#">Home</a>
+            <a class="hover:opacity-80 transition-opacity" href="#">Destinations</a>
+            <a class="hover:opacity-80 transition-opacity" href="#">Travel Guides</a>
+        </div>
+        <button class="material-symbols-outlined text-on-surface" data-icon="search">search</button>
+    </nav>
+    <!-- Side Navigation (Off-Canvas Drawer) -->
+    <aside
+        class="flex flex-col h-screen py-8 px-6 w-80 fixed left-0 top-0 z-[100] bg-[#f2f7ff] dark:bg-[#1e3042] shadow-[0px_12px_32px_rgba(30,48,66,0.08)]"
+        id="nav-drawer">
+        <div class="flex items-center justify-between mb-12">
+            <div>
+                <h1 class="text-xl font-black text-[#1e3042] dark:text-white font-headline">Travel Helper</h1>
+                <p class="text-xs font-bold opacity-50 uppercase tracking-tighter">by ASCENT</p>
+            </div>
+            <button class="p-2 hover:bg-surface-container rounded-full lg:hidden" onclick="toggleDrawer()">
+                <span class="material-symbols-outlined" data-icon="close">close</span>
+            </button>
+        </div>
+        <div class="space-y-4 flex-grow overflow-y-auto pr-2">
+            <a class="text-[#005da7] dark:text-[#68abff] font-bold border-l-4 border-[#005da7] bg-white/50 dark:bg-white/10 p-3 rounded-r-lg flex items-center gap-3 transition-all duration-300"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="home">home</span>
+                <span class="font-headline">Home</span>
+            </a>
+            <div class="pt-2">
+                <p class="px-3 mb-4 text-[0.65rem] uppercase tracking-[0.2em] font-bold opacity-40">Featured Countries
+                </p>
+                <div class="space-y-1">
+                    <a class="p-3 flex items-center gap-3 text-[#1e3042] dark:text-slate-300 font-headline font-bold hover:bg-surface-container rounded-lg transition-colors"
+                        href="Colombia.html">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span> Colombia
+                    </a>
+                    <a class="p-3 flex items-center gap-3 text-[#1e3042] dark:text-slate-300 font-headline font-bold hover:bg-surface-container rounded-lg transition-colors"
+                        href="USA.html">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span> USA
+                    </a>
+                    <a class="p-3 flex items-center gap-3 text-[#1e3042] dark:text-slate-300 font-headline font-bold hover:bg-surface-container rounded-lg transition-colors"
+                        href="Brazil.html">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span> Brazil
+                    </a>
+                    <a class="p-3 flex items-center gap-3 text-[#1e3042] dark:text-slate-300 font-headline font-bold hover:bg-surface-container rounded-lg transition-colors"
+                        href="France.html">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span> France
+                    </a>
+                    <a class="p-3 flex items-center gap-3 text-[#1e3042] dark:text-slate-300 font-headline font-bold hover:bg-surface-container rounded-lg transition-colors"
+                        href="Germany.html">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span> Germany
+                    </a>
+                    <a class="p-3 flex items-center gap-3 text-[#1e3042] dark:text-slate-300 font-headline font-bold hover:bg-surface-container rounded-lg transition-colors"
+                        href="China.html">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span> China
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Active Expedition Card -->
+        <div class="mt-auto p-4 bg-surface-container-low rounded-lg border border-outline-variant/20">
+            <span class="block text-[0.65rem] uppercase tracking-widest font-bold text-secondary mb-2">Active
+                Expedition</span>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full overflow-hidden shadow-sm">
+                    <img class="w-full h-full object-cover"
+                        data-alt="vibrant flag of Colombia with yellow blue and red stripes"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtch-vqxXhW_FQqmDr14bFB_OQH5qDwlLcS5tLBl2lEXD5eU3LacyeocrH8pYRLDgBBP2BcxYDF9we5qiDD7lHXtuTvLmyzzrRNSEl4UXZeG4QM3ZXRjJwkymD84ZpKX54bKsrS5xI7sqPl43YJbOLIs8xTFpZ1SeWxztcrEG_Pt6SNIuDgtyf91tg8ehKchVLxUAiZpvsXsY8zG0w5eZyToDZ-qseH28-3cumrz2YlorStECrXUpkqV2v0tPFOUZyH6qgiWKz-Fo" />
+                </div>
+                <div>
+                    <p class="font-headline font-bold text-sm">Bogotá Discovery</p>
+                    <p class="text-[0.65rem] opacity-70 italic">Starting next month</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <main class="min-h-screen pt-24 pb-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Hero Header -->
+            <header class="text-center mb-16 relative">
+                <div class="absolute -top-12 left-1/2 -translate-x-1/2 opacity-5 pointer-events-none select-none">
+                    <span class="text-[12rem] font-black font-headline uppercase leading-none">Culture</span>
+                </div>
+                <h2
+                    class="text-5xl md:text-7xl font-headline font-black text-on-surface -tracking-[0.04em] mb-4 relative">
+                    Culture Shocks
+                </h2>
+                <p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto font-medium">
+                    Ready for your next adventure? Press the country you're interested about
+                </p>
+            </header>
+            <!-- Map Visualization Section -->
+            <div
+                class="relative w-full aspect-[16/9] bg-surface-container-low rounded-xl overflow-hidden editorial-shadow group">
+                <div
+                    class="absolute inset-0 opacity-40 bg-[radial-gradient(#9cafc5_1px,transparent_1px)] [background-size:20px_20px]">
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <img class="w-full h-full object-cover mix-blend-multiply opacity-20"
+                        data-alt="minimalist clean world map illustration with soft pastel colors and subtle topographic details"
+                        data-location="world map"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkDd9tOG6r3ye0gQiEpypCb1O63voVvNh0_5z7lpA26SsEz0ZEr4tVxz1ftmgkfkjMTI1q98S5alKIIt5PpjMzFTPRLpt13AU2exKH83jp0HkyeNydUK-1i7YaK2s9qPsCeJtkUIY-hGERvlyiKAgVqOH__mhCvoYxLMisHRO9_nj0zErDRFKzoudx9n5GTUo6ohthIocWzYDzWA2F7Up2k07jFA5mIG47DuSjwaReJtdqKFwSm5VIWprZlSvXrYyhsQZjgPVcIUE" />
+                </div>
+                <!-- Interactive Pins -->
+                <div class="absolute top-[55%] left-[25%] group/pin">
+                    <div class="relative flex flex-col items-center">
+                        <div
+                            class="absolute -top-16 opacity-0 group-hover/pin:opacity-100 transition-all glass-panel px-4 py-2 rounded-full editorial-shadow border border-white/20 whitespace-nowrap">
+                            <span class="font-headline font-bold text-xs">Explore Colombia 🇨🇴</span>
+                        </div>
+                        <button onclick="window.location.href='Colombia.html'"
+                            class="w-6 h-6 bg-tertiary rounded-full pin-pulse relative z-10 out-back-transition group-hover/pin:scale-125 border-2 border-white">
+                            <span class="sr-only">Colombia</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute top-[35%] left-[18%] group/pin">
+                    <div class="relative flex flex-col items-center">
+                        <div
+                            class="absolute -top-16 opacity-0 group-hover/pin:opacity-100 transition-all glass-panel px-4 py-2 rounded-full editorial-shadow border border-white/20 whitespace-nowrap">
+                            <span class="font-headline font-bold text-xs">Discover USA 🇺🇸</span>
+                        </div>
+                        <button onclick="window.location.href='USA.html'"
+                            class="w-6 h-6 bg-tertiary rounded-full pin-pulse relative z-10 out-back-transition group-hover/pin:scale-125 border-2 border-white">
+                            <span class="sr-only">USA</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute top-[65%] left-[32%] group/pin">
+                    <div class="relative flex flex-col items-center">
+                        <div
+                            class="absolute -top-16 opacity-0 group-hover/pin:opacity-100 transition-all glass-panel px-4 py-2 rounded-full editorial-shadow border border-white/20 whitespace-nowrap">
+                            <span class="font-headline font-bold text-xs">Vibrant Brazil 🇧🇷</span>
+                        </div>
+                        <button onclick="window.location.href='Brazil.html'"
+                            class="w-6 h-6 bg-tertiary rounded-full pin-pulse relative z-10 out-back-transition group-hover/pin:scale-125 border-2 border-white">
+                            <span class="sr-only">Brazil</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute top-[32%] left-[48%] group/pin">
+                    <div class="relative flex flex-col items-center">
+                        <div
+                            class="absolute -top-16 opacity-0 group-hover/pin:opacity-100 transition-all glass-panel px-4 py-2 rounded-full editorial-shadow border border-white/20 whitespace-nowrap">
+                            <span class="font-headline font-bold text-xs">Artistic France 🇫🇷</span>
+                        </div>
+                        <button onclick="window.location.href='France.html'"
+                            class="w-6 h-6 bg-tertiary rounded-full pin-pulse relative z-10 out-back-transition group-hover/pin:scale-125 border-2 border-white">
+                            <span class="sr-only">France</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute top-[28%] left-[51%] group/pin">
+                    <div class="relative flex flex-col items-center">
+                        <div
+                            class="absolute -top-16 opacity-0 group-hover/pin:opacity-100 transition-all glass-panel px-4 py-2 rounded-full editorial-shadow border border-white/20 whitespace-nowrap">
+                            <span class="font-headline font-bold text-xs">History in Germany 🇩🇪</span>
+                        </div>
+                        <button onclick="window.location.href='Germany.html'"
+                            class="w-6 h-6 bg-tertiary rounded-full pin-pulse relative z-10 out-back-transition group-hover/pin:scale-125 border-2 border-white">
+                            <span class="sr-only">Germany</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute top-[38%] left-[75%] group/pin">
+                    <div class="relative flex flex-col items-center">
+                        <div
+                            class="absolute -top-16 opacity-0 group-hover/pin:opacity-100 transition-all glass-panel px-4 py-2 rounded-full editorial-shadow border border-white/20 whitespace-nowrap">
+                            <span class="font-headline font-bold text-xs">Grandeur of China 🇨🇳</span>
+                        </div>
+                        <button onclick="window.location.href='China.html'"
+                            class="w-6 h-6 bg-tertiary rounded-full pin-pulse relative z-10 out-back-transition group-hover/pin:scale-125 border-2 border-white">
+                            <span class="sr-only">China</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Bento Highlights Section -->
+            <section class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div
+                    class="md:col-span-2 rounded-lg bg-surface-container-lowest p-8 flex flex-col md:flex-row gap-8 items-center editorial-shadow overflow-hidden group">
+                    <div class="flex-1 space-y-4">
+                        <span class="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Featured
+                            Experience</span>
+                        <h3 class="text-3xl font-headline font-bold text-on-surface">The Amazon Basin</h3>
+                        <p class="text-on-surface-variant leading-relaxed">Venture into the heart of the world's lungs.
+                            Experience Colombia and Brazil from a different perspective.</p>
+                        <button
+                            class="adventure-gradient text-on-primary rounded-full px-8 py-3 font-headline font-bold out-back-transition hover:scale-105">View
+                            Itinerary</button>
+                    </div>
+                    <div class="flex-1 w-full h-64 rounded-lg overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            data-alt="misty tropical rainforest canopy at dawn with soft ethereal lighting and layers of green foliage"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_jQfYdQ4mjcEOxxurDggkoIbYcftBkcag6mwuw_jpB-4W_O5wrThNuUlUAHVAz0YtL5HePF4Molw4N-6-200cEUTWA95DBHaDePrI3fSJFclu_32SLYu1pTZR4SuMRXgIjqWi1ZAWLxqMygL6WipeTZWQNH_ZIX7-GFOYGqAwBpVCT1w-pUsHHykd0tCAtSJ2bt_HKnzSiV8Jx8Jez3kLW16GPEReHfRqJjlDyIjYWPZvUmLZIKX5kKjZ0-eQQhH3oo6vqFav1Ho" />
+                    </div>
+                </div>
+                <div
+                    class="rounded-lg bg-secondary-container p-8 flex flex-col justify-between editorial-shadow relative overflow-hidden group">
+                    <div class="relative z-10">
+                        <span class="material-symbols-outlined text-on-secondary-container text-4xl mb-4"
+                            data-icon="explore">explore</span>
+                        <h3 class="text-2xl font-headline font-bold text-on-secondary-container leading-tight">
+                            Traveler's Handbook</h3>
+                        <p class="text-on-secondary-container/70 mt-2">Essential tips for navigating new cultural
+                            landscapes.</p>
+                    </div>
+                    <button
+                        class="relative z-10 text-on-secondary-container font-bold flex items-center gap-2 mt-8 group">
+                        Read More
+                        <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform"
+                            data-icon="arrow_forward">arrow_forward</span>
+                    </button>
+                    <div
+                        class="absolute -bottom-10 -right-10 opacity-10 group-hover:rotate-12 transition-transform duration-500">
+                        <span class="material-symbols-outlined text-[10rem]" data-icon="map">map</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- Footer Shell -->
+    <footer
+        class="bg-[#e8f2ff] dark:bg-[#1e3042] w-full py-12 flex flex-col items-center gap-4 border-t border-[#9cafc5]/15">
+        <div class="flex gap-8 mb-4">
+            <a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors"
+                href="#">Terms of Service</a>
+            <a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors"
+                href="#">Privacy Policy</a>
+            <a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors"
+                href="#">Contact</a>
+        </div>
+        <div class="flex items-center gap-2 text-[#1e3042] dark:text-white font-headline">
+            <span class="font-bold">Travel Helper</span>
+            <span class="opacity-40">|</span>
+            <span class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest">Powered by ASCENT ⛰️</span>
+        </div>
+    </footer>
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('nav-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const isOpen = drawer.classList.contains('open');
+
+            if (isOpen) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('open');
+                document.body.style.overflow = '';
+            } else {
+                drawer.classList.add('open');
+                overlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Travel Helper - China Guide</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#004a23",
+                    "on-primary-fixed-variant": "#003461",
+                    "secondary": "#a63300",
+                    "on-secondary-fixed": "#631b00",
+                    "primary-dim": "#005192",
+                    "on-primary-container": "#002b52",
+                    "on-background": "#1e3042",
+                    "primary-fixed-dim": "#599ef1",
+                    "surface-container": "#d9eaff",
+                    "inverse-surface": "#000f1e",
+                    "secondary-fixed-dim": "#ffb197",
+                    "surface-bright": "#f2f7ff",
+                    "surface-container-highest": "#c4e0ff",
+                    "outline-variant": "#9cafc5",
+                    "outline": "#66798d",
+                    "inverse-on-surface": "#8c9fb4",
+                    "tertiary": "#006a35",
+                    "on-primary-fixed": "#000c1e",
+                    "secondary-fixed": "#ffc4b2",
+                    "on-tertiary-fixed-variant": "#006a35",
+                    "on-error-container": "#570008",
+                    "on-surface": "#1e3042",
+                    "primary": "#005da7",
+                    "surface-variant": "#c4e0ff",
+                    "inverse-primary": "#68abff",
+                    "surface-container-low": "#e8f2ff",
+                    "tertiary-container": "#6bfe9c",
+                    "on-error": "#ffefee",
+                    "on-surface-variant": "#4b5d70",
+                    "primary-container": "#68abff",
+                    "secondary-dim": "#922c00",
+                    "secondary-container": "#ffc4b2",
+                    "error-dim": "#9f0519",
+                    "tertiary-fixed-dim": "#5bef90",
+                    "on-secondary-container": "#842700",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f2f7ff",
+                    "surface-container-high": "#cee5ff",
+                    "on-tertiary-container": "#005f2f",
+                    "on-secondary": "#ffefeb",
+                    "background": "#f2f7ff",
+                    "error-container": "#fb5151",
+                    "surface-tint": "#005da7",
+                    "primary-fixed": "#68abff",
+                    "surface-dim": "#bad7f8",
+                    "on-primary": "#eef3ff",
+                    "tertiary-dim": "#005c2d",
+                    "on-secondary-fixed-variant": "#942d00",
+                    "error": "#b31b25",
+                    "on-tertiary": "#cdffd4",
+                    "tertiary-fixed": "#6bfe9c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Be Vietnam Pro"],
+                    "label": ["Be Vietnam Pro"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .plusJakartaSans { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .beVietnamPro { font-family: 'Be Vietnam Pro', sans-serif; }
+        .glass-panel {
+            background: rgba(242, 247, 255, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        /* Custom dropdown animation styles */
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .dropdown-toggle[aria-expanded="true"] + .dropdown-content {
+            max-height: 500px;
+        }
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+        .dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Drawer Transition Classes */
+        #offcanvas-sidebar {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #offcanvas-overlay {
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        body.drawer-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface beVietnamPro">
+<!-- Off-Canvas Drawer Overlay -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] opacity-0 invisible" id="offcanvas-overlay" onclick="toggleDrawer()"></div>
+<!-- Off-Canvas SideNavBar -->
+<aside class="flex flex-col h-screen py-8 px-6 bg-[#f2f7ff] dark:bg-[#1e3042] w-80 fixed left-0 top-0 z-[100] shadow-[0px_12px_32px_rgba(30,48,66,0.15)] -translate-x-full" id="offcanvas-sidebar">
+<div class="mb-12 flex items-center justify-between">
+<div>
+<div class="text-xl font-black text-[#1e3042] dark:text-white plusJakartaSans -tracking-[0.02em]">Travel Helper</div>
+<div class="text-[10px] opacity-60 font-bold uppercase tracking-widest text-[#005da7] dark:text-[#68abff]">by ASCENT</div>
+</div>
+<button class="material-symbols-outlined text-[#1e3042] dark:text-white p-2 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 rounded-full transition-colors" onclick="toggleDrawer()">close</button>
+</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all cubic-bezier(0.34, 1.56, 0.64, 1) duration-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em]">Home</span>
+</a>
+<!-- Destinations Section in Drawer -->
+<div>
+<button aria-expanded="true" class="dropdown-toggle w-full flex items-center justify-between py-3 px-4 rounded-lg text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 transition-all duration-300" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true')">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined">explore</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em]">Destinations</span>
+</div>
+<span class="material-symbols-outlined dropdown-arrow">expand_more</span>
+</button>
+<div class="dropdown-content mt-1 space-y-1 pl-4 rounded-lg bg-[#e8f2ff] dark:bg-slate-800/50">
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em] text-sm">Colombia</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em] text-sm">USA</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em] text-sm">Brazil</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em] text-sm">France</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em] text-sm">Germany</span>
+</a>
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg text-[#005da7] dark:text-[#68abff] font-bold border-l-4 border-[#005da7] bg-white/80 dark:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em] text-sm ml-2">China</span>
+</a>
+</div>
+</div>
+</nav>
+</aside>
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-6 w-full fixed top-0 z-50 bg-[#f2f7ff]/80 dark:bg-[#1e3042]/80 backdrop-blur-[20px] border-b border-outline-variant/10">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#1e3042] dark:text-white p-2 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 rounded-full transition-colors" onclick="toggleDrawer()">menu</button>
+<span class="text-lg font-black tracking-tighter text-[#1e3042] dark:text-white plusJakartaSans">Travel Helper</span>
+</div>
+<button class="material-symbols-outlined text-[#005da7]">language</button>
+</header>
+<main class="pt-16 pb-24">
+<!-- Hero Header -->
+<section class="relative h-[614px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000" data-alt="Cinematic wide shot of the Great Wall of China winding through emerald green mountains under a soft morning mist" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDoH1x3S94xitErdC4zYwCSaoZ8k6NETQn83pMMDH15kAx7VIDfyHCyk2bO-4tyo5dgJZJ83PfI-fP-vQUehZsdBGLX0yvozov056UMti-znIEyAjsf1SVKwbia0V5ISh8ao7-strxZ1Zaa3gqbBEG6h0oG9cqkR7LOu-rTSUJq2t4sEDwfl6dZRlQAgn1A31EX7EpykW_xiI-1HKpdW0a4T8T_q-x1fSbZlX_lTjxE7PlTP4fnyJgKJ7IdOBttYpMJHudBe3VSlCo')"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface/90"></div>
+<h1 class="relative text-7xl md:text-[8rem] font-extrabold text-on-surface plusJakartaSans tracking-tighter text-center leading-none">
+                CHINA <span class="align-middle inline-block transform -rotate-12">🇨🇳</span>
+</h1>
+</section>
+<!-- Content Grid -->
+<div class="max-w-7xl mx-auto px-6 -mt-20 relative z-10 space-y-24">
+<!-- Flight Path Interaction -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-lg border border-outline-variant/15 overflow-hidden">
+<div class="flex flex-col md:flex-row items-center justify-between gap-12 relative py-12">
+<div class="text-center z-10">
+<div class="text-xs uppercase tracking-widest text-secondary font-bold mb-2">Departing</div>
+<div class="text-3xl font-black text-on-surface plusJakartaSans">YOUR HOME</div>
+</div>
+<div class="flex-1 w-full relative h-12 flex items-center px-4">
+<div class="w-full border-t-2 border-dashed border-primary-container/60 relative">
+<div class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-surface px-4">
+<span class="material-symbols-outlined text-primary text-4xl rotate-90" style="font-variation-settings: 'FILL' 1;">flight</span>
+</div>
+</div>
+</div>
+<div class="text-center z-10">
+<div class="text-xs uppercase tracking-widest text-secondary font-bold mb-2">Arrival</div>
+<div class="text-3xl font-black text-on-surface plusJakartaSans">BEIJING (PEK)</div>
+</div>
+</div>
+</div>
+<!-- Culture Shocks -->
+<section>
+<div class="flex items-baseline justify-between mb-8">
+<h2 class="text-4xl font-black text-on-surface plusJakartaSans -tracking-[0.02em]">Culture Shocks</h2>
+<span class="text-secondary text-sm font-bold uppercase tracking-widest">Etiquette Guide</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6">
+<!-- Card 1 -->
+<div class="md:col-span-2 group overflow-hidden rounded-lg bg-surface-container-low hover:translate-y-[-8px] transition-all duration-300 cubic-bezier(0.34, 1.56, 0.64, 1)">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Close up of steaming bamboo dumplings in a traditional basket with blurred bustling street market background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6C5U3jkDnBEV40NL0j3XzZOmyllRjJph8fBk1GW_fbY_KnoKEQKDWAEX0Y6TklomA_7gvCHy6xOrYH8mh8j6_AnsBZGakue6zBEsI75FP-t-tsf4KxueZQtJzQanrMKTyG4O4LulkGhZPwS010yos4G6ASycCSmemYDT4BvHgtYeo6LY84nJp3IGEa0ajTV-6EujeLKwateLiNR2eWhYJuMzvyDawTDdUpeOZ42HVoLC7LXoFyxb68j02rdS_ygYIpLbTHDQtjAQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1e3042]/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<div class="text-xl font-bold mb-1">No Tipping</div>
+<p class="text-sm opacity-80 max-w-xs">It is often considered offensive or awkward. Excellent service is included in the price.</p>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="md:col-span-2 group overflow-hidden rounded-lg bg-surface-container-low hover:translate-y-[-8px] transition-all duration-300">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Digital payment being made in a modern shop with a smartphone scanning a QR code on a counter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGj1B2FTAREn6qg6kg7wOeBt1GaVGORvtdD2s0fUPFcxfLZq5QcsGjsPuSuweT66oGwIdnNjsY-njuXBDNZkwFQn6IKffI8aguZWwkK0RQ-ZDq5hs9745I2F8fSP1sOwRTe_7mPE0A33EwWCD6Tb_ldBGBe4pbtEqk2SF7RUnsfCNCZ2OOJeix1MWpPO25DEbngDIE0NQFnmiDDp94W0iy41PQKbdZgNZ0TakJVyarYfaNbz7LSoMg-377hOqCaVGCS4AE6RM7Mic"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#1e3042]/80 to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<div class="text-xl font-bold mb-1">Cashless Society</div>
+<p class="text-sm opacity-80 max-w-xs">WeChat and Alipay are mandatory for everything from luxury stores to street snacks.</p>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="md:col-span-1 group overflow-hidden rounded-lg bg-surface-container hover:translate-y-[-8px] transition-all duration-300 flex flex-col">
+<div class="p-6">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<h3 class="text-lg font-black mb-2">Space Sharing</h3>
+<p class="text-sm opacity-70">Personal space concepts differ. Crowds are a normal part of the vibrant urban life.</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="md:col-span-1 group overflow-hidden rounded-lg bg-tertiary-container/30 hover:translate-y-[-8px] transition-all duration-300 flex flex-col">
+<div class="p-6">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary">thermometer</span>
+</div>
+<h3 class="text-lg font-black mb-2">Hot Water</h3>
+<p class="text-sm opacity-70">Drinking hot water is the ultimate health remedy. Always available in hotels and trains.</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="md:col-span-2 group overflow-hidden rounded-lg bg-secondary-container/20 hover:translate-y-[-8px] transition-all duration-300 relative">
+<div class="flex h-full p-6 items-center gap-6">
+<div class="flex-1">
+<h3 class="text-xl font-black mb-2">Square Dancing</h3>
+<p class="text-sm opacity-70">Join the 'Dama' (grandmas) in parks for nightly synchronized dance sessions. It's exercise and social bonding.</p>
+</div>
+<div class="w-32 h-32 rounded-full bg-white shadow-lg overflow-hidden border-4 border-white">
+<img class="w-full h-full object-cover" data-alt="Group of elderly people in colorful clothes dancing in a city park at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCegza92Cy5t0GpQTEEDOEraWTwDkmojwQJlckF5w5ZZnXUi_fS61sgjq4XO6_GO1lWOCLb86h-Azve16SJlAof68r57u6HxYZeELJXW7DYNli8Idmhotdl_Gmox0PXMra4pZKIMZUuX4FimHbiNM56dHftWMlXUjYfd7JpEoVN81iIbcMd4TtuwNSRHrRfw5MN_QNLeNtnju0jhMYQfe099ODRanx7qdpBxAz7SB344OjtZIpLK26OIV-TF4Yk5CY8_QlmJ0xbew4"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Video Carousel -->
+<section>
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-4xl font-black text-on-surface plusJakartaSans -tracking-[0.02em]">Visual Stories</h2>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-white hover:opacity-80 transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-white hover:opacity-80 transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-8 overflow-hidden">
+<div class="min-w-[85%] md:min-w-[400px] aspect-video bg-surface-container rounded-lg overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="Neon lights of Shanghai's Bund at night reflected in the river" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCed7Hnb8JLEoELixITOz1mx4hmTY9V12VHX0ui-t3DjAexMo_YN4Q4niwM-N2CHHGIN624zAjayTA6xlkhpbBkDELtDnZcf3s12r0lYa9hmiww7mdcXhEyOEX3kq4F_F0P4vEMjLzuf_jfz-SHTVddhTt-rmeMViccspYREz0q8ZGVc1S1oF191yTe6lFa6YCP_476fwfixn7fb4Vi4z-N7Qq3ZzSLJ6uBXAJjlGtkyQUGbL-6jkFPMqODkDJMRjT9iDz3UI9Chcg"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-all">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="absolute bottom-4 left-4 text-white font-bold drop-shadow-md">Nightlife in Shanghai</div>
+</div>
+<div class="min-w-[85%] md:min-w-[400px] aspect-video bg-surface-container rounded-lg overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="Traditional red lanterns hanging in a row at a Buddhist temple in Beijing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF01Q_diUtoWRyae1rqKfMcuRTveR0ucqwqVaFSOVZMEisNWM2tKD1hRhOPlGLZytrCqrePJAJhhT3JGNKFrE1VRqjQZcsnUmcsnMnpTywoJ523oqObGyziW-D4QUfRRoM-Vo1Zv4BKAbQInpArya4LbD8BaYBqgveq-ILHBOq4cUd5RpYlPSZTHxDK3XzN15iw5qVSfKQkZzw_IUgF03upRkGOOKFJplQYS7HvevKkfx05YNe2ELTz_WCQXhXpHwFYjLSgGkT4qI"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-all">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="absolute bottom-4 left-4 text-white font-bold drop-shadow-md">Ancient Traditions</div>
+</div>
+<div class="min-w-[85%] md:min-w-[400px] aspect-video bg-surface-container rounded-lg overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="A futuristic bullet train at a high-tech station platform in Shenzhen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFHK1u35pFezcR6-oPYQlBv4Se7CTQCI-9LtXWxlY2cPpVY_8Zz_ZRj0PG9pEYc80PjVJnhFyPmmTF3UlTvuJktvmc23HX6GaGMlYhqnExUW5tlpfAoFT0TW1KLoWK-wEI2Eo_mlCcj3iiYQ6zAexHDy60WFnOjnQWPNVsUgKdqc2F1Hl_3hnyLkrVTTvcJflr9muzFbfhn-SpCV_YK8QFPx9WYXAe_5rK45RnJ9THNLm6PFgQmf0qWZsPQiIoTpjutSmQ3dbAmgQ"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-all">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="absolute bottom-4 left-4 text-white font-bold drop-shadow-md">Technological Marvels</div>
+</div>
+</div>
+</section>
+<!-- Slang Grid -->
+<section class="pb-12">
+<div class="mb-8">
+<h2 class="text-4xl font-black text-on-surface plusJakartaSans -tracking-[0.02em]">Local Tongue</h2>
+<p class="text-on-surface-variant max-w-2xl mt-2">Speak like a local. These essential slang terms will help you build rapport instantly.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Hello</div>
+<div class="text-lg font-black text-on-surface">Ni hao</div>
+<div class="text-[10px] opacity-60">你 好</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Amazing</div>
+<div class="text-lg font-black text-on-surface">Tai bang le</div>
+<div class="text-[10px] opacity-60">太 棒 了</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Awesome</div>
+<div class="text-lg font-black text-on-surface">Gei li</div>
+<div class="text-[10px] opacity-60">给 力</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Like/Upvote</div>
+<div class="text-lg font-black text-on-surface">Zan</div>
+<div class="text-[10px] opacity-60">赞</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Thank You</div>
+<div class="text-lg font-black text-on-surface">Xie xie</div>
+<div class="text-[10px] opacity-60">谢 谢</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">No Problem</div>
+<div class="text-lg font-black text-on-surface">Mei wen ti</div>
+<div class="text-[10px] opacity-60">没 问 题</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">How Much?</div>
+<div class="text-lg font-black text-on-surface">Duo shao qian?</div>
+<div class="text-[10px] opacity-60">多 少 钱</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Delicious</div>
+<div class="text-lg font-black text-on-surface">Hen hao chi</div>
+<div class="text-[10px] opacity-60">很 好 吃</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Excuse Me</div>
+<div class="text-lg font-black text-on-surface">Bu hao yi si</div>
+<div class="text-[10px] opacity-60">不 好 意 思</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Big Boss</div>
+<div class="text-lg font-black text-on-surface">Laoban</div>
+<div class="text-[10px] opacity-60">老 板</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Where is...?</div>
+<div class="text-lg font-black text-on-surface">...zai nar?</div>
+<div class="text-[10px] opacity-60">在 哪 儿</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Friend</div>
+<div class="text-lg font-black text-on-surface">Peng you</div>
+<div class="text-[10px] opacity-60">朋 友</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Hurry Up</div>
+<div class="text-lg font-black text-on-surface">Kuai dian</div>
+<div class="text-[10px] opacity-60">快 点</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Just So So</div>
+<div class="text-lg font-black text-on-surface">Ma ma hu hu</div>
+<div class="text-[10px] opacity-60">马 马 虎 虎</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">I don't understand</div>
+<div class="text-lg font-black text-on-surface">Ting bu dong</div>
+<div class="text-[10px] opacity-60">听 不 懂</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10 rounded-lg hover:bg-white transition-colors">
+<div class="text-secondary text-[10px] font-bold tracking-widest uppercase mb-1">Goodbye</div>
+<div class="text-lg font-black text-on-surface">Zai jian</div>
+<div class="text-[10px] opacity-60">再 见</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#e8f2ff] dark:bg-[#1e3042] w-full py-12 flex flex-col items-center gap-4 border-t border-[#9cafc5]/15">
+<div class="font-bold text-[#1e3042] dark:text-white plusJakartaSans text-xl">Travel Helper</div>
+<div class="flex gap-8 text-[0.75rem] beVietnamPro font-medium uppercase tracking-widest">
+<a class="text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Terms of Service</a>
+<a class="text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Contact</a>
+</div>
+<div class="text-[0.75rem] opacity-60 text-on-surface-variant mt-4">
+            Powered by ASCENT 🏔️
+    </div>
+</footer>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 glass-panel flex items-center justify-around px-6 z-40 border-t border-outline-variant/10">
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center text-[#005da7]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">public</span>
+<span class="text-[10px] font-bold">China</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] font-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant" onclick="toggleDrawer()">
+<span class="material-symbols-outlined">menu</span>
+<span class="text-[10px] font-bold">Menu</span>
+</button>
+</nav>
+<script>
+    function toggleDrawer() {
+        const sidebar = document.getElementById('offcanvas-sidebar');
+        const overlay = document.getElementById('offcanvas-overlay');
+        const body = document.body;
+        
+        const isOpen = sidebar.classList.contains('translate-x-0');
+        
+        if (isOpen) {
+            sidebar.classList.replace('translate-x-0', '-translate-x-full');
+            overlay.classList.add('opacity-0', 'invisible');
+            overlay.classList.remove('opacity-100', 'visible');
+            body.classList.remove('drawer-open');
+        } else {
+            sidebar.classList.replace('-translate-x-full', 'translate-x-0');
+            overlay.classList.remove('opacity-0', 'invisible');
+            overlay.classList.add('opacity-100', 'visible');
+            body.classList.add('drawer-open');
+        }
+    }
+</script>
+</body></html>

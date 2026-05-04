@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Country {
+  id            String         @id @default(uuid())
+  name          String         @unique
+  code          String         @unique // ISO 3166-1 alpha-2
+  flag_emoji    String
+  latitude      Float
+  longitude     Float
+  primary_color String
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @updatedAt
+
+  cultureShocks CultureShock[]
+  slangs        LocalSlang[]
+  videos        Video[]
+  pageViews     PageView[]
+
+  @@index([code])
+  @@index([name])
+}
+
+model CultureShock {
+  id            String   @id @default(uuid())
+  country_id    String
+  country       Country  @relation(fields: [country_id], references: [id], onDelete: Cascade)
+  title         String
+  description   String
+  icon          String
+  image_url     String
+  display_order Int
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@index([country_id])
+  @@index([display_order])
+  @@index([is_active])
+}
+
+model LocalSlang {
+  id            String   @id @default(uuid())
+  country_id    String
+  country       Country  @relation(fields: [country_id], references: [id], onDelete: Cascade)
+  term          String
+  meaning       String
+  context       String
+  pronunciation String?
+  category      String   // 'greeting', 'food', 'expression', 'insult', 'other'
+  display_order Int
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@index([country_id])
+  @@index([display_order])
+  @@index([is_active])
+  @@index([category])
+}
+
+model Video {
+  id            String   @id @default(uuid())
+  country_id    String
+  country       Country  @relation(fields: [country_id], references: [id], onDelete: Cascade)
+  title         String
+  description   String?
+  video_type    String   // 'youtube', 'vimeo', 'local'
+  video_url     String
+  thumbnail_url String?
+  duration      String?
+  display_order Int
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@index([country_id])
+  @@index([display_order])
+  @@index([is_active])
+}
+
+model Translation {
+  id              String   @id @default(uuid())
+  entity_type     String   // 'culture_shock', 'video', 'ui_text'
+  entity_id       String
+  language_code   String
+  field_name      String
+  translated_text String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  @@index([entity_type, entity_id, language_code])
+}
+
+model User {
+  id                  String    @id @default(uuid())
+  email               String    @unique
+  password_hash       String
+  first_name          String
+  last_name           String
+  preferred_language  String    @default("en")
+  role                String    @default("user") // 'user', 'admin'
+  is_active           Boolean   @default(true)
+  email_verified      Boolean   @default(false)
+  last_login          DateTime?
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+}
+
+model PageView {
+  id          String   @id @default(uuid())
+  country_id  String?
+  country     Country? @relation(fields: [country_id], references: [id], onDelete: SetNull)
+  page_type   String   // 'home', 'country_detail'
+  user_id     String?
+  session_id  String
+  ip_address  String
+  user_agent  String
+  referrer    String
+  viewed_at   DateTime @default(now())
+}

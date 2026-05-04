@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#004a23",
+                    "on-primary-fixed-variant": "#003461",
+                    "secondary": "#a63300",
+                    "on-secondary-fixed": "#631b00",
+                    "primary-dim": "#005192",
+                    "on-primary-container": "#002b52",
+                    "on-background": "#1e3042",
+                    "primary-fixed-dim": "#599ef1",
+                    "surface-container": "#d9eaff",
+                    "inverse-surface": "#000f1e",
+                    "secondary-fixed-dim": "#ffb197",
+                    "surface-bright": "#f2f7ff",
+                    "surface-container-highest": "#c4e0ff",
+                    "outline-variant": "#9cafc5",
+                    "outline": "#66798d",
+                    "inverse-on-surface": "#8c9fb4",
+                    "tertiary": "#006a35",
+                    "on-primary-fixed": "#000c1e",
+                    "secondary-fixed": "#ffc4b2",
+                    "on-tertiary-fixed-variant": "#006a35",
+                    "on-error-container": "#570008",
+                    "on-surface": "#1e3042",
+                    "primary": "#005da7",
+                    "surface-variant": "#c4e0ff",
+                    "inverse-primary": "#68abff",
+                    "surface-container-low": "#e8f2ff",
+                    "tertiary-container": "#6bfe9c",
+                    "on-error": "#ffefee",
+                    "on-surface-variant": "#4b5d70",
+                    "primary-container": "#68abff",
+                    "secondary-dim": "#922c00",
+                    "secondary-container": "#ffc4b2",
+                    "error-dim": "#9f0519",
+                    "tertiary-fixed-dim": "#5bef90",
+                    "on-secondary-container": "#842700",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f2f7ff",
+                    "surface-container-high": "#cee5ff",
+                    "on-tertiary-container": "#005f2f",
+                    "on-secondary": "#ffefeb",
+                    "background": "#f2f7ff",
+                    "error-container": "#fb5151",
+                    "surface-tint": "#005da7",
+                    "primary-fixed": "#68abff",
+                    "surface-dim": "#bad7f8",
+                    "on-primary": "#eef3ff",
+                    "tertiary-dim": "#005c2d",
+                    "on-secondary-fixed-variant": "#942d00",
+                    "error": "#b31b25",
+                    "on-tertiary": "#cdffd4",
+                    "tertiary-fixed": "#6bfe9c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Be Vietnam Pro"],
+                    "label": ["Be Vietnam Pro"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .plusJakartaSans { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .beVietnamPro { font-family: 'Be Vietnam Pro', sans-serif; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Dropdown Animation */
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .dropdown-group:focus-within .dropdown-content,
+        .dropdown-group:hover .dropdown-content {
+            max-height: 400px;
+        }
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+        }
+        .dropdown-group:focus-within .dropdown-arrow,
+        .dropdown-group:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface beVietnamPro overflow-x-hidden">
+<!-- Off-Canvas Drawer Overlay -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-[90] hidden transition-opacity duration-300 opacity-0" id="side-nav-overlay"></div>
+<!-- Off-Canvas Sidebar -->
+<aside class="bg-surface-container-lowest dark:bg-on-background h-full w-80 fixed left-0 top-0 z-[100] flex flex-col py-8 px-6 shadow-2xl transition-transform duration-300 transform -translate-x-full" id="side-nav">
+<div class="mb-10 px-4 flex justify-between items-center">
+<div>
+<h1 class="text-xl font-black text-on-background dark:text-white plusJakartaSans -tracking-[0.02em]">Travel Helper</h1>
+<p class="text-xs uppercase tracking-widest text-secondary font-bold opacity-70">by ASCENT</p>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" id="menu-close">close</button>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Home Link -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-background dark:text-slate-300 hover:bg-surface-container-low dark:hover:bg-slate-700 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-bold plusJakartaSans">Home</span>
+</a>
+<div class="pt-4 pb-2 px-4">
+<span class="text-[0.65rem] font-black uppercase tracking-[0.2em] text-outline">Destinations</span>
+</div>
+<!-- Destination Links -->
+<div class="space-y-1">
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-primary font-bold border-l-4 border-primary bg-primary-container/10 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-bold plusJakartaSans">Colombia</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-background dark:text-slate-300 opacity-70 hover:opacity-100 hover:bg-surface-container-low dark:hover:bg-slate-700 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-bold plusJakartaSans">USA</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-background dark:text-slate-300 opacity-70 hover:opacity-100 hover:bg-surface-container-low dark:hover:bg-slate-700 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-bold plusJakartaSans">Brazil</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-background dark:text-slate-300 opacity-70 hover:opacity-100 hover:bg-surface-container-low dark:hover:bg-slate-700 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-bold plusJakartaSans">France</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-background dark:text-slate-300 opacity-70 hover:opacity-100 hover:bg-surface-container-low dark:hover:bg-slate-700 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-bold plusJakartaSans">Germany</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-background dark:text-slate-300 opacity-70 hover:opacity-100 hover:bg-surface-container-low dark:hover:bg-slate-700 hover:translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">public</span>
+<span class="font-bold plusJakartaSans">China</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="min-h-screen relative">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center h-16 px-6 md:px-12 bg-surface/80 dark:bg-on-background/80 backdrop-blur-[20px] border-b border-outline-variant/10">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container" id="menu-toggle">menu</button>
+<span class="text-lg font-black tracking-tighter text-on-surface dark:text-white plusJakartaSans">Travel Helper</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity">language</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative pt-32 pb-20 px-6 md:px-12 overflow-hidden">
+<div class="max-w-6xl mx-auto text-center relative z-10">
+<span class="inline-block text-secondary font-bold tracking-[0.2em] mb-4 uppercase text-xs">Destination Spotlight</span>
+<h1 class="text-6xl md:text-8xl font-extrabold plusJakartaSans -tracking-[0.03em] text-on-surface mb-6">COLOMBIA 🇨🇴</h1>
+<p class="max-w-2xl mx-auto text-lg text-on-surface-variant leading-relaxed">Experience the heartbeat of South America. From Andean peaks to Caribbean rhythms, discover a land of infinite flavor and warmth.</p>
+</div>
+<!-- Organic Background Element -->
+<div class="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-10 pointer-events-none">
+<img alt="Colombia Flag" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIxmDzV-3yQjH20Fc_OU6nQXoh6qewFGJzaspYVxC7Y4_V_AVkc6ODJGKzokLLAQYIbe_-QPf1bqjPhbc875S7hyS56nwGNlGk6G1bXf9yfPg66JtiBqU467bns7aAR7VCO0k2wez7RfYmH0kuyNginJmU-JQ5jmmByfSmO_wxfheX7uQL6yZSPB-N1mUWpdBGfO0eB3itTS9oFZGZ1JLNP4RgyVA-BWFWPGxO0WCzWUJNjhO0mn9CJBdiFiYDVvkuLsBFMVTUIkc"/>
+</div>
+</section>
+<!-- Culture Shocks Section -->
+<section class="py-20 px-6 md:px-12 bg-surface-container-low relative">
+<div class="max-w-6xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+<div class="max-w-xl">
+<span class="label-md text-secondary font-bold text-[0.75rem] tracking-widest uppercase block mb-2">The Survival Guide</span>
+<h2 class="text-4xl font-bold plusJakartaSans -tracking-[0.02em]">Culture Shocks</h2>
+</div>
+<p class="text-on-surface-variant max-w-sm">Navigating the beautiful complexities of Colombian daily life. Don't just visit—belong.</p>
+</div>
+<div class="relative">
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-20 hidden lg:block" preserveaspectratio="none">
+<path d="M100,100 C300,50 500,200 700,150 S900,400 1100,300" fill="none" id="flightPath" stroke="#005da7" stroke-dasharray="8,8" stroke-width="2"></path>
+<text font-size="24" x="0" y="0"><textpath href="#flightPath" startoffset="20%">✈️</textpath></text>
+</svg>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-[0px_12px_32px_rgba(30,48,66,0.04)] hover:scale-[1.02] transition-all duration-300 relative group overflow-hidden">
+<div class="relative z-10">
+<span class="bg-primary-container text-on-primary-container w-10 h-10 rounded-full flex items-center justify-center font-bold mb-6">01</span>
+<h3 class="text-2xl font-bold plusJakartaSans mb-4">Hora Latina</h3>
+<p class="text-on-surface-variant leading-relaxed">Punctuality is flexible. "Ya casi llego" (I'm almost there) could mean anything from 5 minutes to half an hour. Relax and enjoy the flow.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[120px]">schedule</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-[0px_12px_32px_rgba(30,48,66,0.04)] hover:scale-[1.02] transition-all duration-300 relative group overflow-hidden">
+<div class="relative z-10">
+<span class="bg-secondary-container text-on-secondary-container w-10 h-10 rounded-full flex items-center justify-center font-bold mb-6">02</span>
+<h3 class="text-2xl font-bold plusJakartaSans mb-4">Warm Greetings</h3>
+<p class="text-on-surface-variant leading-relaxed">Handshakes are formal; a light kiss on the right cheek or a vigorous hug is the standard among friends and acquaintances.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[120px]">handshake</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-[0px_12px_32px_rgba(30,48,66,0.04)] hover:scale-[1.02] transition-all duration-300 relative group overflow-hidden">
+<div class="relative z-10">
+<span class="bg-tertiary-container text-on-tertiary-container w-10 h-10 rounded-full flex items-center justify-center font-bold mb-6">03</span>
+<h3 class="text-2xl font-bold plusJakartaSans mb-4">Personal Space</h3>
+<p class="text-on-surface-variant leading-relaxed">Colombians are tactile. Expect closer standing distances during conversation and plenty of friendly physical contact.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[120px]">groups</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl p-8 shadow-[0px_12px_32px_rgba(30,48,66,0.04)] hover:scale-[1.02] transition-all duration-300 relative group overflow-hidden">
+<div class="relative z-10">
+<span class="bg-primary-container text-on-primary-container w-10 h-10 rounded-full flex items-center justify-center font-bold mb-6">04</span>
+<h3 class="text-2xl font-bold plusJakartaSans mb-4">Coffee Culture</h3>
+<p class="text-on-surface-variant leading-relaxed">Don't expect "Tinto" to be a fancy latte. It's small, black, and sweet—the social fuel of every street corner and office.</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+<span class="material-symbols-outlined text-[120px]">coffee</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="lg:col-span-4 bg-primary text-on-primary rounded-xl p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl overflow-hidden relative">
+<div class="md:w-2/3 relative z-10">
+<span class="bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mb-6">05</span>
+<h3 class="text-3xl font-bold plusJakartaSans mb-4">Safety: No dar papaya</h3>
+<p class="text-on-primary/80 text-lg leading-relaxed">"Don't give papaya"—a local proverb meaning don't make yourself an easy target. Stay aware, avoid flashy jewelry in crowded areas, and use common sense.</p>
+</div>
+<div class="md:w-1/3 flex justify-center relative z-10">
+<span class="material-symbols-outlined text-[160px] opacity-20">shield_lock</span>
+</div>
+<div class="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-primary via-primary to-primary-dim opacity-50"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Video Carousel Section -->
+<section class="py-24 px-6 md:px-12 bg-surface overflow-hidden">
+<div class="max-w-6xl mx-auto mb-12 flex justify-between items-end">
+<div>
+<span class="label-md text-secondary font-bold tracking-widest uppercase block mb-2">Cinematic Journey</span>
+<h2 class="text-4xl font-bold plusJakartaSans -tracking-[0.02em]">See It In Action</h2>
+</div>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/20 hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-8 overflow-x-auto pb-12 snap-x scrollbar-hide -mx-6 px-6 md:mx-0 md:px-0">
+<div class="min-w-[320px] md:min-w-[450px] snap-start">
+<div class="aspect-video rounded-lg overflow-hidden bg-surface-container-highest relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="vibrant street in cartagena with colorful colonial buildings and hanging bougainvillea flowers in morning sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPKGcYrWRRlf7t5IXan6NDX-8W-5tn2y2EpSnXV4AKMu8zCyDJSGa98VCYVRBhuY4V5dJVG_Kg8PuIxKX0XVHAMbilURxjCdrQ0VKszY5XFdfW_rF_OGgtj8e0ifrk4p4T5OmE3DPBlRYWoEElg0vQ6qKzCbFA3-fhUjPx9B7ptPbK3yetTrw8W1lN5jaEYBOTwobO4uaEw1dmd_m289pizxdTjJftiRUG_U1meGi8OZK5nAdv4oXExqsdbspomM1jhDStmLlhz9c"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<p class="text-white font-bold text-xl drop-shadow-md">The Colors of Cartagena</p>
+</div>
+</div>
+</div>
+<div class="min-w-[320px] md:min-w-[450px] snap-start">
+<div class="aspect-video rounded-lg overflow-hidden bg-surface-container-highest relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="aerial drone shot of the lush green valle de cocora with tall wax palm trees and rolling mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqfyVNnVHC-teA_FuSG13Cdhh-acKMbWkAbkvls3wS3MYotNqUTsjeNjWDVRCvbKI0rkuylu17oTygqAn1Pg2e_RjVJUmbc3Gk_81U9YaD2_Cax2lyqMFfiadGEYZXm19ouz8f5IuFTyD-X0gTFza53VSekPLbS4rQMMxyebg2map_6ngNwabx1SrS1U0GpoPd1XdRA96NsmdzidQz2IvPIYnoG2iUMI1Z8LviGygSZfsl7nWkPpu2lEUhV1CnCtlUP8VthdGkTiA"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<p class="text-white font-bold text-xl drop-shadow-md">Mystical Cocora Valley</p>
+</div>
+</div>
+</div>
+<div class="min-w-[320px] md:min-w-[450px] snap-start">
+<div class="aspect-video rounded-lg overflow-hidden bg-surface-container-highest relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="high angle view of medellin city at dusk with lights beginning to twinkle across the valley floor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVaHNnZPXs29BVTvkriYhsWCaxm1Kj0Oaq5UhZETAv-GN9X5u3B8ejV5LTm5ts8J8B31a6XV7FhPnAplhHoniI_qPBfBJk2YhRpC0dF-JiTAf_R6J6SIa7puu_q8ENYU774y3xBiqdJF_lAMYTFTxCAerLaUzO9KO6Z7VOlb0k234UcewekbM6ZJmbqVkyJuNhATelDHGbHAFrFZpEyvTrT42pfCRN664qk9xywmLtj4IVuSkmHt8izmHum2WTVDYjPTO72nkgyzw"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<p class="text-white font-bold text-xl drop-shadow-md">Medellín: City of Eternal Spring</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Slang Grid Section -->
+<section class="py-24 px-6 md:px-12 bg-surface-container">
+<div class="max-w-6xl mx-auto">
+<div class="text-center mb-16">
+<span class="label-md text-secondary font-bold tracking-widest uppercase block mb-2">Speak Like a Native</span>
+<h2 class="text-4xl font-bold plusJakartaSans -tracking-[0.02em] mb-4">Local Communication</h2>
+<p class="text-on-surface-variant max-w-lg mx-auto">Unlock the secrets of Paisa, Costeño, and Rolo dialects with these essential terms.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-primary font-bold mb-1">Parcero</p>
+<p class="text-xs text-on-surface-variant">Close friend / Buddy</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-secondary font-bold mb-1">Chimba</p>
+<p class="text-xs text-on-surface-variant">Cool / Awesome</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-tertiary font-bold mb-1">Vaina</p>
+<p class="text-xs text-on-surface-variant">Thing / Situation</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-primary font-bold mb-1">Bacano</p>
+<p class="text-xs text-on-surface-variant">Great / Nice</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-secondary font-bold mb-1">Mijo/a</p>
+<p class="text-xs text-on-surface-variant">My son/daughter (Affectionate)</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-tertiary font-bold mb-1">Tinto</p>
+<p class="text-xs text-on-surface-variant">Black coffee</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-primary font-bold mb-1">Rumbear</p>
+<p class="text-xs text-on-surface-variant">To party</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-secondary font-bold mb-1">Puebliar</p>
+<p class="text-xs text-on-surface-variant">Visit small towns</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-tertiary font-bold mb-1">Puente</p>
+<p class="text-xs text-on-surface-variant">Long weekend</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-primary font-bold mb-1">Qué más?</p>
+<p class="text-xs text-on-surface-variant">What's up?</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-secondary font-bold mb-1">Polas</p>
+<p class="text-xs text-on-surface-variant">Beers</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-tertiary font-bold mb-1">Chévere</p>
+<p class="text-xs text-on-surface-variant">Cool / Fun</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-primary font-bold mb-1">Cachaco</p>
+<p class="text-xs text-on-surface-variant">Person from Bogotá</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-secondary font-bold mb-1">Guayabo</p>
+<p class="text-xs text-on-surface-variant">Hangover</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-tertiary font-bold mb-1">Listo</p>
+<p class="text-xs text-on-surface-variant">Okay / Ready</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-primary font-bold mb-1">Mono/a</p>
+<p class="text-xs text-on-surface-variant">Blonde / Fair skinned</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-secondary font-bold mb-1">Ganas</p>
+<p class="text-xs text-on-surface-variant">Desire / Enthusiasm</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-tertiary font-bold mb-1">Plata</p>
+<p class="text-xs text-on-surface-variant">Money / Cash</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-primary font-bold mb-1">A la orden</p>
+<p class="text-xs text-on-surface-variant">At your service</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 hover:shadow-lg transition-all group">
+<p class="text-secondary font-bold mb-1">Camellar</p>
+<p class="text-xs text-on-surface-variant">To work hard</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-on-background w-full py-12 flex flex-col items-center gap-4 border-t border-outline-variant/15">
+<div class="flex gap-8 mb-4">
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-on-surface opacity-60 hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-on-surface opacity-60 hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-on-surface opacity-60 hover:text-secondary transition-colors" href="#">Contact</a>
+</div>
+<p class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-on-surface opacity-60">Powered by ASCENT ⛰️</p>
+</footer>
+</main>
+<script>
+  const sidebar = document.getElementById('side-nav');
+  const overlay = document.getElementById('side-nav-overlay');
+  const toggleBtn = document.getElementById('menu-toggle');
+  const closeBtn = document.getElementById('menu-close');
+
+  function openMenu() {
+    overlay.classList.remove('hidden');
+    // Allow for display:block to register before changing opacity for transition
+    setTimeout(() => {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('opacity-0');
+      document.body.style.overflow = 'hidden'; // Prevent scroll when menu is open
+    }, 10);
+  }
+
+  function closeMenu() {
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('opacity-0');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
+  }
+
+  toggleBtn.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  
+  // Close menu on link click
+  const navLinks = sidebar.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>
+</body></html>

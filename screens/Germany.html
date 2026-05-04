@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Germany - Travel Helper</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#004a23",
+                        "on-primary-fixed-variant": "#003461",
+                        "secondary": "#a63300",
+                        "on-secondary-fixed": "#631b00",
+                        "primary-dim": "#005192",
+                        "on-primary-container": "#002b52",
+                        "on-background": "#1e3042",
+                        "primary-fixed-dim": "#599ef1",
+                        "surface-container": "#d9eaff",
+                        "inverse-surface": "#000f1e",
+                        "secondary-fixed-dim": "#ffb197",
+                        "surface-bright": "#f2f7ff",
+                        "surface-container-highest": "#c4e0ff",
+                        "outline-variant": "#9cafc5",
+                        "outline": "#66798d",
+                        "inverse-on-surface": "#8c9fb4",
+                        "tertiary": "#006a35",
+                        "on-primary-fixed": "#000c1e",
+                        "secondary-fixed": "#ffc4b2",
+                        "on-tertiary-fixed-variant": "#006a35",
+                        "on-error-container": "#570008",
+                        "on-surface": "#1e3042",
+                        "primary": "#005da7",
+                        "surface-variant": "#c4e0ff",
+                        "inverse-primary": "#68abff",
+                        "surface-container-low": "#e8f2ff",
+                        "tertiary-container": "#6bfe9c",
+                        "on-error": "#ffefee",
+                        "on-surface-variant": "#4b5d70",
+                        "primary-container": "#68abff",
+                        "secondary-dim": "#922c00",
+                        "secondary-container": "#ffc4b2",
+                        "error-dim": "#9f0519",
+                        "tertiary-fixed-dim": "#5bef90",
+                        "on-secondary-container": "#842700",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f2f7ff",
+                        "surface-container-high": "#cee5ff",
+                        "on-tertiary-container": "#005f2f",
+                        "on-secondary": "#ffefeb",
+                        "background": "#f2f7ff",
+                        "error-container": "#fb5151",
+                        "surface-tint": "#005da7",
+                        "primary-fixed": "#68abff",
+                        "surface-dim": "#bad7f8",
+                        "on-primary": "#eef3ff",
+                        "tertiary-dim": "#005c2d",
+                        "on-secondary-fixed-variant": "#942d00",
+                        "error": "#b31b25",
+                        "on-tertiary": "#cdffd4",
+                        "tertiary-fixed": "#6bfe9c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Dropdown animation */
+        .submenu-container {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .submenu-container.open {
+            grid-template-rows: 1fr;
+        }
+        .submenu-content {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Off-Canvas Overlay -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[105] hidden opacity-0 transition-opacity duration-300" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+<!-- Off-Canvas Sidebar -->
+<aside class="flex flex-col h-screen py-8 px-6 bg-[#f2f7ff] dark:bg-[#1e3042] w-80 fixed left-0 top-0 z-[110] shadow-[0px_12px_32px_rgba(30,48,66,0.15)] transition-transform duration-300 -translate-x-full" id="mobile-sidebar">
+<div class="mb-10 px-4 flex justify-between items-center">
+<div>
+<h2 class="text-xl font-black text-[#1e3042] dark:text-white plusJakartaSans font-bold -tracking-[0.02em]">Travel Helper</h2>
+<p class="text-xs font-bold opacity-50 uppercase tracking-widest text-[#005da7] dark:text-[#68abff]">by ASCENT</p>
+</div>
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors" onclick="toggleSidebar()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 space-y-2 overflow-y-auto no-scrollbar">
+<a class="flex items-center gap-4 py-3 px-4 rounded-lg transition-all duration-300 cubic-bezier(0.34, 1.56, 0.64, 1) text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1" href="#">
+<span class="material-symbols-outlined">home</span> Home
+        </a>
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between gap-4 py-3 px-4 rounded-lg transition-all duration-300 cubic-bezier(0.34, 1.56, 0.64, 1) text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1" onclick="document.getElementById('destinations-submenu').classList.toggle('open'); this.querySelector('.chevron').classList.toggle('rotate-180')">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined">explore</span> Destinations
+                </div>
+<span class="material-symbols-outlined chevron transition-transform duration-300">expand_more</span>
+</button>
+<div class="submenu-container open" id="destinations-submenu">
+<div class="submenu-content">
+<div class="pl-12 pr-4 py-2 space-y-1 tonal-nesting bg-[#e8f2ff] dark:bg-slate-800/50 rounded-lg mt-1">
+<a class="block py-2 px-3 rounded-md transition-all text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-white/5" href="#">Colombia</a>
+<a class="block py-2 px-3 rounded-md transition-all text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-white/5" href="#">USA</a>
+<a class="block py-2 px-3 rounded-md transition-all text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-white/5" href="#">Brazil</a>
+<a class="block py-2 px-3 rounded-md transition-all text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-white/5" href="#">France</a>
+<a class="block py-2 px-3 rounded-md transition-all text-[#005da7] dark:text-[#68abff] font-bold border-l-4 border-[#005da7] bg-white/50 dark:bg-white/10" href="#">Germany</a>
+<a class="block py-2 px-3 rounded-md transition-all text-[#1e3042] dark:text-slate-300 opacity-70 hover:bg-white/50 dark:hover:bg-white/5" href="#">China</a>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="mt-auto px-4 pt-6 border-t border-outline-variant/15">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMWZzYT5TAm0km22jcZUTAP46BdSNpKiaIkOXsuRJx_i0p1GfaOpa4r54cH924uhKcvv_ZTpVioEIAUd3tra6GW-KOImHU7BG0Jey7HXRYxIwLT9s4MvPHLY3UyHCYBwyCI_ZeuOu8y4A3RDdVlBbRA66InYlUudoQmByNjG4Rnf50GAIs4rgWUoQ_GqXNJdtPwcY94uChqr2BRzMP6WQmySPzDfgKN3MMh5G-hxzlSrA97cWR9k3sO9SGi7rmL_CaWJ4GoT04teQ"/>
+<div>
+<p class="text-sm font-bold">Explorer Guest</p>
+<p class="text-xs opacity-60">Level 4 Voyager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center h-16 px-6 md:px-12 bg-[#f2f7ff]/80 dark:bg-[#1e3042]/80 backdrop-blur-[20px] transition-transform">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary cursor-pointer p-2 hover:bg-primary/5 rounded-full transition-colors" onclick="toggleSidebar()">menu</button>
+<span class="text-lg font-black tracking-tighter text-[#1e3042] dark:text-white plusJakartaSans">Travel Helper</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#005da7] dark:text-[#68abff] hover:opacity-80 transition-opacity cursor-pointer">language</span>
+<span class="material-symbols-outlined text-[#1e3042] dark:text-white cursor-pointer">search</span>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="pt-32 pb-20 px-6 md:px-16 text-center relative overflow-hidden">
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+<img alt="Berlin Landscape" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHwiSUONicPInl7oo616mdmnuZdApGiDiZFunaN2MXrIyakp0mAEE3iUixIFvWWzmvQCBeo3pZT8dD3AuwVuNkNypMZAABBLsJscw1lxW9deCX5j2xKoKqjRwvDKRLP1Vj-Mu8HtUgyEINt5R8aVV0UrR3spMTb6B8-466zxBqbqE0k3_OSPG8QvMgT2tFDL_AQ_ubmn5IJ-X-Rz-aVUCz8di9hQu-tbHzv5zLnAufLHh_vIOdtXT-SKiOSiiOTyRILWlXgcIHkbo"/>
+</div>
+<div class="relative z-10">
+<span class="label-MD text-secondary font-bold tracking-widest uppercase mb-4 inline-block">Central Europe Expedition</span>
+<h1 class="text-5xl md:text-8xl font-extrabold tracking-tighter mb-6 plusJakartaSans text-[#1e3042]">GERMANY 🇩🇪</h1>
+<p class="max-w-2xl mx-auto text-lg text-on-surface-variant leading-relaxed mb-12">
+                Discover the heart of Europe through a lens of precision, rich history, and surprising cultural depth. From Berlin's avant-garde edge to the traditional timber frames of Bavaria.
+            </p>
+<div class="relative max-w-lg mx-auto py-8">
+<div class="absolute w-full border-t-2 border-dashed border-primary/30 top-1/2 -translate-y-1/2"></div>
+<div class="flex justify-between items-center relative">
+<div class="bg-surface-container-lowest p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div class="animate-bounce-slow">
+<span class="material-symbols-outlined text-secondary text-3xl">flight</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-tertiary">explore</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Culture Shocks Bento Grid -->
+<section class="py-20 px-6 md:px-16 bg-surface-container-low">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+<div>
+<span class="text-secondary font-bold uppercase tracking-widest text-xs">Cultural Nuances</span>
+<h2 class="text-3xl md:text-4xl font-bold mt-2">Culture Shocks</h2>
+</div>
+<p class="text-on-surface-variant max-w-sm">Things that might surprise you during your first week in the Federal Republic.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<h3 class="text-2xl font-bold mb-4">The Cult of Punctuality</h3>
+<p class="text-on-surface-variant leading-relaxed">In Germany, being "on time" actually means arriving five minutes early. Punctuality isn't just polite; it's a social contract. Trains, appointments, and casual meetings are expected to start precisely as scheduled.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="bg-secondary/10 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-secondary">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Directness</h3>
+<p class="text-on-surface-variant text-sm">German communication is efficient and honest. What might seem blunt to outsiders is actually seen as respect for the other person's time.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="bg-tertiary/10 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-tertiary">
+<span class="material-symbols-outlined">recycling</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Strict Recycling</h3>
+<p class="text-on-surface-variant text-sm">Waste management is a science here. Mastering the multi-colored bin system is your first rite of passage as a visitor.</p>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-primary">
+<span class="material-symbols-outlined">volume_off</span>
+</div>
+<h3 class="text-xl font-bold mb-4">Sunday Silence</h3>
+<p class="text-on-surface-variant text-sm">Ruhetag (Rest Day) is sacred. Most shops are closed, and loud domestic activities are strictly discouraged to preserve collective peace.</p>
+</div>
+<div class="md:col-span-3 bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300 flex flex-col md:flex-row gap-8 items-center">
+<div class="md:w-1/3">
+<div class="bg-secondary/10 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-secondary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h3 class="text-2xl font-bold mb-2">Cash is King</h3>
+<p class="text-on-surface-variant">"Nur Bares ist Wahres." Despite being a tech giant, many cafes and smaller shops still exclusively prefer physical currency.</p>
+</div>
+<div class="md:w-2/3 h-48 w-full rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+<img alt="Euro banknotes" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA95pzH43tqjEJzww-6xDmsh2JKSNnTZ_ClzyW2EwNgVWlGSYhZSbpM0UW3LSQhc4i-yLsI2C4-VRNk6kus1-WS0RZ2aKRAm9jLMOTK8q8XPIGTc_fwGJxD4ESFpzIEVaJ6bdfUtLqhXtRgfTV3e1hd2RaeW77f-r_xU5RdRkqmGT22cLFhyf4SK3uEVRR_gIz8XO6gIkzTgSbA9K3su17odOyxA5_RQi4TlQruxyD1DYuWTxxoMnpKmrW6I6T9Hs1nX09ae4HYViQ"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Video Carousel Section -->
+<section class="py-24 px-6 md:px-16">
+<div class="flex justify-between items-center mb-10">
+<h2 class="text-3xl font-bold">Immersive Experiences</h2>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center hover:bg-primary transition-colors text-on-primary">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex overflow-x-auto gap-8 pb-8 no-scrollbar snap-x">
+<div class="min-w-[300px] md:min-w-[450px] snap-start group">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-on-background">
+<img alt="Video Thumb" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_Vp-LNNkD-Xp0PirwTWzbNE_U90HVX8TvKmOY9odETxY1df6aDK6cDXd8ScZ4oWThQo0QXj3PBQDnOtd3449nLYT_3ygztrP9ZQF7Wq3dhOJ-UDqr_NTehDvx8wDRXZlaSYJLnNQmEC-dtOJPchhjRNzygi14QCPT7Uh6pHd06vyxg8BGEhcIU3TFQGUwmk_KTfXZn5lXykC44eIuVVDjAMaXdY5w4_t_Fnex9XIWsXqNJqGe-wdTQ5lCWfj34CVe_i5Pu-dj5bE"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<span class="text-secondary text-xs font-bold uppercase">Travel Guide</span>
+<h4 class="text-xl font-bold mt-1">Exploring the Romantic Road</h4>
+</div>
+<div class="min-w-[300px] md:min-w-[450px] snap-start group">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-on-background">
+<img alt="Video Thumb" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDay5-xJvyc2ExhhLFKsOSH3MuAGTOAMiKi1IByiHeNKMMFWf66m9vnBSQS4HcB4PhK6IXdf49YkT0yUHcsIHs8jOGSWgohBFXLScvHAh7eoNGv_sX9c7lidK-wjlN2UBjxtMdbB30nxADsTiVg_ZTGh-5wjAl2mBQvQNYJogbT-WD8P7Boe_589whzztfaxNfoZ9x8XhahQygI3g53VtIgopwkHRyAz04m5hzKbSz7pY5VpWAEYwp4MJStYTKvNj1pIfxM5lcXnVc"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<span class="text-secondary text-xs font-bold uppercase">Urban Culture</span>
+<h4 class="text-xl font-bold mt-1">48 Hours in Berlin's Underground</h4>
+</div>
+<div class="min-w-[300px] md:min-w-[450px] snap-start group">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-4 bg-on-background">
+<img alt="Video Thumb" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK85W_-f2arDazLyQHa-8gbtG8rv24mB3EvdZCXWlcppNyUdUydmCsXBlYyxPTfQAP_yWgZ32VMYBxkfhriqc-eFE5HqN-0YDjJTwkegqqYjWtQmuTXtrWfkC2JFK7wOwDZrLV16UYzmua8Ojvl85PgvqzCMr6iadpxi0vxkwYpB3DAgB9-rFtaViR5Y5SfvyD0UKlHRogGlYnd1TmKSERviqZGWWUU-agUFBnH0OL4v5CNVG5F3hiXw6-6gSe8CqRm3cIQHIKLo8"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<span class="text-secondary text-xs font-bold uppercase">Scenic Routes</span>
+<h4 class="text-xl font-bold mt-1">The Magic of the Bavarian Alps</h4>
+</div>
+</div>
+</section>
+<!-- Slang Grid Section -->
+<section class="py-24 px-6 md:px-16 bg-white relative">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-16">
+<span class="text-tertiary font-bold uppercase tracking-widest text-xs">Lingua Franca</span>
+<h2 class="text-4xl font-bold mt-2">Local Communication</h2>
+<p class="text-on-surface-variant mt-4">Master these 20 German slang terms to blend in like a local Berliner or a relaxed Münchner.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container hover:bg-primary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-primary mb-1">Na?</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Hello / How are you?</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-secondary-container/30 hover:bg-secondary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-secondary-dim mb-1">Alter</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Dude / Mate</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-tertiary-container/30 hover:bg-tertiary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-tertiary-dim mb-1">Geil</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Cool / Awesome</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-primary-container/20 hover:bg-primary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-primary mb-1">Krass</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Extreme / Intense</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container-high hover:bg-surface-variant transition-all cursor-default text-center">
+<span class="text-xl font-bold text-on-surface-variant mb-1">Moin</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Northern Hello</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-tertiary-container/20 hover:bg-tertiary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-tertiary mb-1">Bock</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Up for it</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-secondary-container/20 hover:bg-secondary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-secondary mb-1">Feierabend</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">End of work</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container hover:bg-primary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-primary mb-1">Quatsch</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Nonsense</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container-high hover:bg-surface-variant transition-all cursor-default text-center">
+<span class="text-xl font-bold text-on-surface-variant mb-1">Digger</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Bro / Homie</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-tertiary-container/30 hover:bg-tertiary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-tertiary-dim mb-1">Läuft</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">It's going well</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-primary-container/30 hover:bg-primary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-on-primary-container mb-1">Papperlapapp</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Gibberish</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-secondary-container/40 hover:bg-secondary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-secondary-dim mb-1">Servus</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Southern Greeting</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container hover:bg-primary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-primary mb-1">Hammer</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Amazing</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-tertiary-container/20 hover:bg-tertiary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-tertiary mb-1">Jein</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Yes and No</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container-high hover:bg-surface-variant transition-all cursor-default text-center">
+<span class="text-xl font-bold text-on-surface-variant mb-1">Mach's gut</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Take care</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-primary-container/10 hover:bg-primary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-primary mb-1">Alles klar</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Everything fine</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-secondary-container/20 hover:bg-secondary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-secondary mb-1">Passt</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">It fits / Okay</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-tertiary-container/30 hover:bg-tertiary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-tertiary-dim mb-1">Supa</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Super</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-surface-container-high hover:bg-surface-variant transition-all cursor-default text-center">
+<span class="text-xl font-bold text-on-surface-variant mb-1">Tschüss</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Bye</span>
+</div>
+<div class="aspect-square flex flex-col items-center justify-center p-4 rounded-lg bg-primary-container/20 hover:bg-primary-container transition-all cursor-default text-center">
+<span class="text-xl font-bold text-primary mb-1">Echt?</span>
+<span class="text-[0.65rem] uppercase opacity-60 font-medium">Really?</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="flex flex-col items-center gap-4 w-full py-12 bg-[#e8f2ff] dark:bg-[#1e3042] tonal-nesting-top border-t border-[#9cafc5]/15">
+<div class="font-bold text-[#1e3042] dark:text-white mb-2">Travel Helper</div>
+<div class="flex flex-wrap justify-center gap-8 mb-6">
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Terms of Service</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Privacy Policy</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Contact</a>
+</div>
+<p class="text-xs font-bold text-[#a63300]">Powered by ASCENT 🏔️</p>
+<p class="text-[0.65rem] opacity-40 mt-4">© 2024 Travel Helper. All rights reserved.</p>
+</footer>
+</main>
+<!-- BottomNavBar for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-md flex items-center justify-around z-[100] px-4 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center text-primary font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">public</span>
+<span class="text-[10px]">World</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined">map</span>
+<span class="text-[10px] font-bold">Guide</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant opacity-60">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('mobile-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        
+        const isOpen = !sidebar.classList.contains('-translate-x-full');
+        
+        if (isOpen) {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => {
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    overlay.classList.add('hidden');
+                }
+            }, 300);
+            document.body.style.overflow = '';
+        } else {
+            overlay.classList.remove('hidden');
+            // Force reflow
+            overlay.offsetHeight;
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('opacity-0');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+</script>
+</body></html>

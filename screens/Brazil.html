@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#004a23",
+                    "on-primary-fixed-variant": "#003461",
+                    "secondary": "#a63300",
+                    "on-secondary-fixed": "#631b00",
+                    "primary-dim": "#005192",
+                    "on-primary-container": "#002b52",
+                    "on-background": "#1e3042",
+                    "primary-fixed-dim": "#599ef1",
+                    "surface-container": "#d9eaff",
+                    "inverse-surface": "#000f1e",
+                    "secondary-fixed-dim": "#ffb197",
+                    "surface-bright": "#f2f7ff",
+                    "surface-container-highest": "#c4e0ff",
+                    "outline-variant": "#9cafc5",
+                    "outline": "#66798d",
+                    "inverse-on-surface": "#8c9fb4",
+                    "tertiary": "#006a35",
+                    "on-primary-fixed": "#000c1e",
+                    "secondary-fixed": "#ffc4b2",
+                    "on-tertiary-fixed-variant": "#006a35",
+                    "on-error-container": "#570008",
+                    "on-surface": "#1e3042",
+                    "primary": "#005da7",
+                    "surface-variant": "#c4e0ff",
+                    "inverse-primary": "#68abff",
+                    "surface-container-low": "#e8f2ff",
+                    "tertiary-container": "#6bfe9c",
+                    "on-error": "#ffefee",
+                    "on-surface-variant": "#4b5d70",
+                    "primary-container": "#68abff",
+                    "secondary-dim": "#922c00",
+                    "secondary-container": "#ffc4b2",
+                    "error-dim": "#9f0519",
+                    "tertiary-fixed-dim": "#5bef90",
+                    "on-secondary-container": "#842700",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f2f7ff",
+                    "surface-container-high": "#cee5ff",
+                    "on-tertiary-container": "#005f2f",
+                    "on-secondary": "#ffefeb",
+                    "background": "#f2f7ff",
+                    "error-container": "#fb5151",
+                    "surface-tint": "#005da7",
+                    "primary-fixed": "#68abff",
+                    "surface-dim": "#bad7f8",
+                    "on-primary": "#eef3ff",
+                    "tertiary-dim": "#005c2d",
+                    "on-secondary-fixed-variant": "#942d00",
+                    "error": "#b31b25",
+                    "on-tertiary": "#cdffd4",
+                    "tertiary-fixed": "#6bfe9c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Be Vietnam Pro"],
+                    "label": ["Be Vietnam Pro"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0px 12px 32px rgba(30, 48, 66, 0.08);
+        }
+        .plusJakartaSans { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .beVietnamPro { font-family: 'Be Vietnam Pro', sans-serif; }
+        
+        /* Dropdown Animation */
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .dropdown-active .dropdown-content {
+            max-height: 500px;
+        }
+        .dropdown-active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Off-canvas Drawer Styles */
+        #sidebar {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #sidebar-overlay {
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container overflow-x-hidden">
+<!-- SideNavBar (Off-Canvas Drawer) -->
+<div class="fixed inset-0 bg-black/40 z-[90] hidden opacity-0 backdrop-blur-sm" id="sidebar-overlay"></div>
+<aside class="bg-[#f2f7ff] dark:bg-[#1e3042] h-full w-[300px] fixed left-0 top-0 z-[100] flex flex-col py-8 px-6 shadow-[0px_12px_32px_rgba(30,48,66,0.15)] -translate-x-full" id="sidebar">
+<div class="mb-12 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div>
+<h1 class="text-xl font-black text-[#1e3042] dark:text-white plusJakartaSans -tracking-[0.02em]">Travel Helper</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant opacity-60">by ASCENT</p>
+</div>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-black/5 rounded-full transition-colors" onclick="toggleSidebar()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex flex-col gap-2">
+<!-- Home -->
+<a class="text-[#1e3042] dark:text-slate-300 opacity-70 flex items-center gap-4 px-4 py-3 rounded-lg hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">home</span> <span class="plusJakartaSans font-bold -tracking-[0.02em]">Home</span>
+</a>
+<!-- Destinations -->
+<div class="dropdown-active group">
+<button class="w-full text-[#1e3042] dark:text-slate-300 opacity-70 flex items-center justify-between px-4 py-3 rounded-lg hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined">explore</span>
+<span class="plusJakartaSans font-bold -tracking-[0.02em]">Destinations</span>
+</div>
+<span class="material-symbols-outlined dropdown-arrow transition-transform duration-300">expand_more</span>
+</button>
+<div class="dropdown-content mt-1 flex flex-col gap-1 pl-6">
+<a class="text-[#1e3042] dark:text-slate-300 opacity-70 flex items-center gap-4 px-4 py-2 rounded-lg hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span> Colombia
+                </a>
+<a class="text-[#1e3042] dark:text-slate-300 opacity-70 flex items-center gap-4 px-4 py-2 rounded-lg hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span> USA
+                </a>
+<a class="text-[#005da7] dark:text-[#68abff] font-bold border-l-4 border-[#005da7] bg-white/50 dark:bg-white/10 flex items-center gap-4 px-4 py-2 rounded-lg transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span> Brazil
+                </a>
+<a class="text-[#1e3042] dark:text-slate-300 opacity-70 flex items-center gap-4 px-4 py-2 rounded-lg hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span> France
+                </a>
+<a class="text-[#1e3042] dark:text-slate-300 opacity-70 flex items-center gap-4 px-4 py-2 rounded-lg hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span> Germany
+                </a>
+<a class="text-[#1e3042] dark:text-slate-300 opacity-70 flex items-center gap-4 px-4 py-2 rounded-lg hover:bg-[#e8f2ff] dark:hover:bg-slate-700 hover:translate-x-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-sm">public</span> China
+                </a>
+</div>
+</div>
+</nav>
+<div class="mt-auto pt-8 border-t border-outline-variant/20">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 text-center">Version 2.4.0</p>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f2f7ff]/80 dark:bg-[#1e3042]/80 backdrop-blur-[20px] flex justify-between items-center h-16 px-6 md:px-12">
+<div class="flex items-center gap-4">
+<button class="p-2 -ml-2 text-primary dark:text-primary-fixed hover:bg-primary/10 rounded-full transition-colors" id="menu-toggle">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-lg font-black tracking-tighter text-[#1e3042] dark:text-white plusJakartaSans">Travel Helper</span>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-[#005da7] dark:text-[#68abff] hover:opacity-80 transition-opacity active:scale-95">language</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="profile avatar of a smiling man in a professional setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmiGnID45-d174xdl2hfl2zieJf1o8GpIDkQKPhp2R2h0wgoFMHntDybaB-UQDSw8yS0AlNDC7SfXPEoVcea59VACa-wZNT42EefCJgfAYEM-DSUEL1l4Dkxs3ORwpiHixtnJp-bBl_x1gh8hI2djtd2cy1AGmCMihUZatju-6hAANKsjRvqsTSaoJto5k4eVWn2LUh9SyAPpDnqYFfK5czEQkiFj2SGk1Fr6AESgekUhVlaobHXF-CmpNmILhqXhUDNZ4ovwCdKU"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 px-6 md:px-12 max-w-[1440px] mx-auto">
+<!-- Hero Header -->
+<section class="mb-16 text-center">
+<span class="text-secondary font-label font-bold uppercase tracking-[0.3em] text-[0.75rem] mb-4 block">Destination Spotlight</span>
+<h1 class="text-[4rem] md:text-[6rem] font-black plusJakartaSans -tracking-[0.04em] leading-none mb-6">BRAZIL 🇧🇷</h1>
+<div class="h-1 w-24 bg-gradient-to-r from-primary to-primary-container mx-auto rounded-full"></div>
+</section>
+<!-- Culture Shocks Bento Grid -->
+<section class="mb-24">
+<div class="flex items-end justify-between mb-8">
+<div>
+<h2 class="text-3xl font-black plusJakartaSans">Culture Shocks</h2>
+<p class="text-on-surface-variant max-w-md">Prepare your senses for the unique rhythm of Brazilian life.</p>
+</div>
+<span class="text-outline-variant font-label text-xs uppercase tracking-widest hidden md:block">Scroll for more</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+<!-- Physical contact -->
+<div class="bg-surface-container-lowest p-10 rounded-xl editorial-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 text-8xl material-symbols-outlined">diversity_3</div>
+<span class="text-secondary font-bold text-xs uppercase tracking-widest block mb-4">Etiquette</span>
+<h3 class="text-2xl font-bold mb-4 plusJakartaSans">Physical contact</h3>
+<p class="text-on-surface-variant leading-relaxed">Brazilians are famously warm. Be prepared for hugs, air kisses on both cheeks, and touches on the arm during conversation.</p>
+</div>
+<!-- Late dinners -->
+<div class="bg-surface-container-low p-10 rounded-xl relative overflow-hidden group border-b-4 border-primary">
+<div class="absolute top-0 right-0 p-8 opacity-10 text-8xl material-symbols-outlined">dark_mode</div>
+<span class="text-primary font-bold text-xs uppercase tracking-widest block mb-4">Daily Life</span>
+<h3 class="text-2xl font-bold mb-4 plusJakartaSans">Late dinners</h3>
+<p class="text-on-surface-variant leading-relaxed">Standard dinner times range from 8 PM to 10 PM. Most restaurants only start getting lively after the sun goes down.</p>
+</div>
+<!-- Carnival energy -->
+<div class="bg-surface-container-lowest p-10 rounded-xl editorial-shadow relative overflow-hidden group md:col-span-2 lg:col-span-1">
+<div class="absolute top-0 right-0 p-8 opacity-10 text-8xl material-symbols-outlined">celebration</div>
+<span class="text-tertiary font-bold text-xs uppercase tracking-widest block mb-4">Social Spirit</span>
+<h3 class="text-2xl font-bold mb-4 plusJakartaSans">Carnival energy</h3>
+<p class="text-on-surface-variant leading-relaxed">It's not just a week in February; it's a year-round mindset of celebration, music, and spontaneous outdoor gatherings.</p>
+</div>
+<!-- Directness -->
+<div class="bg-surface-container-high p-10 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 text-8xl material-symbols-outlined">chat_bubble</div>
+<span class="text-secondary font-bold text-xs uppercase tracking-widest block mb-4">Communication</span>
+<h3 class="text-2xl font-bold mb-4 plusJakartaSans">Directness</h3>
+<p class="text-on-surface-variant leading-relaxed">While polite, Brazilians are remarkably honest about feelings and personal questions. Expect refreshing transparency.</p>
+</div>
+<!-- Thumbs up usage -->
+<div class="lg:col-span-2 bg-gradient-to-br from-primary to-primary-dim p-12 rounded-xl text-white relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-4 mb-6">
+<span class="material-symbols-outlined text-4xl">thumb_up</span>
+<h3 class="text-3xl font-black plusJakartaSans">Thumbs up usage</h3>
+</div>
+<p class="text-on-primary text-xl max-w-2xl leading-relaxed">The "Joinha" is the universal remote for Brazil. It means yes, thank you, okay, I understand, or just hello. Master this gesture and you've mastered 50% of the language.</p>
+</div>
+<div class="absolute -bottom-10 -right-10 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-[15rem]" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Animated Flight Path Visualization -->
+<section class="mb-24 bg-surface-container-low rounded-xl p-12 text-center relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-xs uppercase tracking-[0.4em] font-bold text-outline mb-8">Flight Route: NYC → RIO</h3>
+<div class="flex items-center justify-between max-w-3xl mx-auto relative px-8">
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center editorial-shadow mb-4">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<span class="font-bold">JFK</span>
+</div>
+<div class="flex-1 flex items-center justify-center relative">
+<div class="w-full border-t-2 border-dashed border-primary/30 h-0 relative">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-surface-container-low px-4">
+<span class="material-symbols-outlined text-primary rotate-90 text-3xl">flight</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center editorial-shadow mb-4">
+<span class="material-symbols-outlined text-tertiary">explore</span>
+</div>
+<span class="font-bold">GIG</span>
+</div>
+</div>
+<p class="mt-8 text-on-surface-variant font-label text-sm italic">Approximate flight time: 9 hours 45 minutes</p>
+</div>
+<!-- Decorative Map Background -->
+<div class="absolute inset-0 opacity-5 pointer-events-none grayscale">
+<img class="w-full h-full object-cover" data-alt="faded world map outline on aged parchment texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI5xFGZsD4xxpE21NaKzlmL_Kxxq0j8LKsNfjPvz949oB0O9ElZZCNW99M2cyPlYIN_lv1HWSxeHZKX-qXM8UL-4anXqiBXjf5ThPWNkV3wwGW2PlFoG8D53fKtyqmmfJv1OqMw3CSsvcNT7le2n-l2K6RDq_gsOZsT_Ic45MdqC20uzotBoLZRq48TzW0zD64tCOtiu2wQRZm_J84S4RBwPYFQd2X2_7uAGsFBBsz8Ym0Qaqh201P9_Xucs7EkGROPQ3IBG3Q_9E"/>
+</div>
+</section>
+<!-- Videos Carousel -->
+<section class="mb-24">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-3xl font-black plusJakartaSans">Visual Journeys</h2>
+<div class="flex gap-4">
+<button class="w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center hover:bg-white transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-8 overflow-hidden">
+<!-- Video Card 1 -->
+<div class="min-w-[320px] md:min-w-[450px] aspect-video rounded-lg overflow-hidden relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="aerial drone shot of Christ the Redeemer statue in Rio de Janeiro with dramatic clouds at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYNVB9MvILz98MJt8Q29FgKPoC_Q-p01YAP4TfmjgIHOzzO9A8qjlTNYVmC8jBVBBegkZW144sgCxsF6z0q_zsVfst1a-8ZzCEjjXFdROluxFPb5sHHopU_6LMlj2lVgEYuWnzmsbOxeKsyr6IeMuarrKulngIP3wCvQXzFrJNEINCowpGbb4RU4XvukypobjZb7dYflrnuUPCRhQN6lWL4U4h9LBdbflxl_lbBJdpIz9L0O3dPS4k3yu_Gwn94dXYCvMnEVAW7tQ"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 text-white w-full bg-gradient-to-t from-black/80 to-transparent">
+<p class="font-bold text-lg">Exploring Rio de Janeiro</p>
+<p class="text-xs opacity-70">12:45 • Travel Guide</p>
+</div>
+</div>
+<!-- Video Card 2 -->
+<div class="min-w-[320px] md:min-w-[450px] aspect-video rounded-lg overflow-hidden relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="close up of vibrant brazilian street food acai bowl with tropical fruits and condensed milk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYKNFwsjBrjygMFGXhoB3AORmiz28uhP4X20zV_ZHYSVNS2XE7kiplxVtD8J3S65ch1FUGcEXMuvs__FgjYZUMim7acPqkh8JAegeNLcieELbLs27dfigvp5vMUZ6AiYq9qXlw8qupBD-8D0y3deVc75oSRj3x9B5wflVfks1pLQbX3BijLSbgDe-mm3BHyguc3AYeFTz7HnPM_E3xzfiulPPhLqdXJFY6cLUy8ljRPJAw60jrFSE0Eg1rtb0yheYvLRJc7HY6YVs"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 text-white w-full bg-gradient-to-t from-black/80 to-transparent">
+<p class="font-bold text-lg">Top 10 Brazilian Street Foods</p>
+<p class="text-xs opacity-70">08:20 • Culinary</p>
+</div>
+</div>
+<!-- Video Card 3 -->
+<div class="min-w-[320px] md:min-w-[450px] aspect-video rounded-lg overflow-hidden relative group cursor-pointer opacity-50">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="dense green foliage of the Amazon rainforest with a winding river seen from above" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVPoFVclkM-gPbh9EIxw-4Y_5ayEnKCkVS9KDMOsFS-A7IDr7fkqjB6GWwNwz7QAEwdL8wDjp6MufleleOWATbL8pZZyKYjMHpvmHDHmjDPloR9O_1pBUo6m9iyXkWtpquz4tWBCs6WhhIDmNaK8YNN4f6dnEWStjnLSlt0Le4Ck66cM8ZClY5wllUNtTJ_bXz2e23xW7k730QSSwsErM61yVh_VSXkshWtbVWMcGU4VgzA69oWETj_gNNGdR1P48o1aA-_F34Pi4"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-6 text-white w-full bg-gradient-to-t from-black/80 to-transparent">
+<p class="font-bold text-lg">Amazon Expedition Diary</p>
+<p class="text-xs opacity-70">22:15 • Nature</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Local Communication Grid -->
+<section class="mb-24">
+<div class="bg-white rounded-xl p-12 editorial-shadow">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-black plusJakartaSans mb-4">Lingo de Rua</h2>
+<p class="text-on-surface-variant italic">20 essential Brazilian Portuguese slang terms to sound like a local.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Beleza</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Everything's good</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Valeu</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Thanks / Bye</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Cara</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Dude / Guy</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Bacana</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Cool / Nice</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Massa</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Awesome</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">E aí?</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">What's up?</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Tá ligado?</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">You know?</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Pois é</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Indeed / Exactly</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Rolê</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Hangout / Trip</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Treta</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Trouble / Fight</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Irado</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Radical / Sick</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Gafe</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Blunder</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Gringo</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Any foreigner</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Vixe!</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Oh my!</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Zoeira</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Messing around</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Folgado</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Lazy / Cheeky</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Pipoco</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Massive success</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Bater papo</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">To chat</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Já era</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">It's over</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg hover:bg-tertiary-container transition-colors group cursor-default">
+<p class="font-bold text-primary group-hover:text-on-tertiary-container">Abração</p>
+<p class="text-[0.65rem] uppercase tracking-tighter opacity-60">Big hug (Goodbye)</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#e8f2ff] dark:bg-[#1e3042] w-full py-12 flex flex-col items-center gap-4 border-t border-[#9cafc5]/15">
+<div class="flex flex-col items-center gap-2">
+<h4 class="font-bold text-[#1e3042] dark:text-white plusJakartaSans">Travel Helper</h4>
+<div class="flex gap-8">
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Terms of Service</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Privacy Policy</a>
+<a class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#1e3042] opacity-60 hover:text-[#a63300] transition-colors" href="#">Contact</a>
+</div>
+</div>
+<p class="beVietnamPro font-medium uppercase text-[0.75rem] tracking-widest text-[#a63300] mt-4">Powered by ASCENT 🏔️</p>
+</footer>
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const menuToggle = document.getElementById('menu-toggle');
+
+    function toggleSidebar() {
+        const isOpen = !sidebar.classList.contains('-translate-x-full');
+        
+        if (isOpen) {
+            // Close
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('opacity-0');
+            setTimeout(() => overlay.classList.add('hidden'), 400);
+            document.body.style.overflow = '';
+        } else {
+            // Open
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('opacity-0');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    menuToggle.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', toggleSidebar);
+
+    // Logic for dropdown interaction inside sidebar
+    document.querySelectorAll('.group button').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const parent = this.closest('.group');
+            parent.classList.toggle('dropdown-active');
+        });
+    });
+
+    // Close sidebar on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+            toggleSidebar();
+        }
+    });
+</script>
+</body></html>
