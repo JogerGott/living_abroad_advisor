@@ -47,6 +47,11 @@ const apiLimiter = rateLimit({
 
 // Serve frontend visual HTML screens from the 'screens' folder in the root path
 app.use('/', express.static(path.join(__dirname, '../../screens')));
+app.use('/videos', express.static(path.join(__dirname, '../../videos')));
+app.use('/audio', express.static(path.join(__dirname, '../../audio')));
+app.use('/game', express.static(path.join(__dirname, '../../game')));
+app.use('/real_game', express.static(path.join(__dirname, '../../real_game/build/web')));
+app.use('/real_game/build/web', express.static(path.join(__dirname, '../../real_game/build/web')));
 
 // API Routes
 app.use('/api/v1', apiLimiter, apiRoutes);
