@@ -1,0 +1,55 @@
+== Stages of Culture Shock ==
+CULTURESHOCK: row 12,col 16  ->  row 1,col 16
+HONEYMOON: row 17,col 17  ->  row 9,col 17
+FRUSTRATION: row 17,col 15  ->  row 17,col 5
+ADJUSTMENT: row 10,col 2  ->  row 1,col 2
+ADAPTATION: row 7,col 3  ->  row 16,col 3
+
+== Culture & Society ==
+CUSTOMS: row 1,col 4  ->  row 7,col 10
+TRADITIONS: row 2,col 3  ->  row 11,col 12
+ETIQUETTE: row 2,col 1  ->  row 10,col 1
+CULTURE: row 2,col 17  ->  row 8,col 17
+IDENTITY: row 4,col 4  ->  row 11,col 4
+VALUES: row 6,col 15  ->  row 6,col 10
+
+== Communication ==
+LANGUAGE: row 8,col 7  ->  row 15,col 7
+COMMUNICATION: row 16,col 8  ->  row 4,col 8
+GREETINGS: row 2,col 7  ->  row 2,col 15
+STEREOTYPES: row 6,col 6  ->  row 16,col 6
+
+== Travel & Global Life ==
+HOMESICK: row 7,col 12  ->  row 14,col 12
+EXCHANGE: row 14,col 13  ->  row 7,col 13
+TRAVEL: row 14,col 9  ->  row 9,col 9
+GLOBAL: row 4,col 15  ->  row 4,col 10
+COMMUNITY: row 16,col 8  ->  row 16,col 16
+
+== Values for a Connected World ==
+DIVERSITY: row 15,col 14  ->  row 7,col 14
+RESPECT: row 18,col 4  ->  row 12,col 4
+INCLUSION: row 3,col 7  ->  row 3,col 15
+EMPATHY: row 18,col 2  ->  row 12,col 2
+TOLERANCE: row 7,col 15  ->  row 15,col 15
+FESTIVALS: row 8,col 5  ->  row 16,col 5
+
+Secret phrase cells (in order):
+R -> row 1, col 3
+E -> row 1, col 6
+S -> row 1, col 9
+P -> row 1, col 12
+E -> row 1, col 15
+C -> row 1, col 18
+T -> row 4, col 18
+A -> row 7, col 18
+L -> row 10, col 18
+L -> row 13, col 18
+C -> row 16, col 18
+U -> row 18, col 17
+L -> row 18, col 14
+T -> row 18, col 11
+U -> row 18, col 8
+R -> row 18, col 5
+E -> row 18, col 2
+S -> row 16, col 1

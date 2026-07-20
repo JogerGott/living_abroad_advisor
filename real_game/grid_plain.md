@@ -1,0 +1,20 @@
+|   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |10 |11 |12 |13 |14 |15 |16 |17 |18 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **1** | R | T | R | C | H | E | X | T | S | K | M | P | P | M | E | K | I | C |
+| **2** | E | N | T | J | U | J | G | R | E | E | T | I | N | G | S | C | C | J |
+| **3** | T | E | O | R | V | S | I | N | C | L | U | S | I | O | N | O | U | P |
+| **4** | I | M | G | I | A | W | T | N | E | L | A | B | O | L | G | H | L | T |
+| **5** | Q | T | X | D | A | D | U | O | A | A | W | W | Y | R | W | S | T | C |
+| **6** | U | S | K | E | X | S | I | I | M | S | E | U | L | A | V | E | U | S |
+| **7** | E | U | A | N | C | T | Q | T | S | S | C | H | E | Y | T | R | R | A |
+| **8** | T | J | D | T | F | E | L | A | I | N | R | O | G | T | O | U | E | N |
+| **9** | T | D | A | I | E | R | A | C | L | O | V | M | N | I | L | T | N | K |
+| **10** | E | A | P | T | S | E | N | I | E | X | N | E | A | S | E | L | O | L |
+| **11** | O | R | T | Y | T | O | G | N | V | Y | J | S | H | R | R | U | O | M |
+| **12** | D | Y | A | T | I | T | U | U | A | P | L | I | C | E | A | C | M | T |
+| **13** | B | H | T | C | V | Y | A | M | R | V | W | C | X | V | N | W | Y | L |
+| **14** | X | T | I | E | A | P | G | M | T | R | I | K | E | I | C | Y | E | M |
+| **15** | Q | A | O | P | L | E | E | O | S | O | V | A | Y | D | E | T | N | L |
+| **16** | S | P | N | S | S | S | B | C | O | M | M | U | N | I | T | Y | O | C |
+| **17** | S | M | S | E | N | O | I | T | A | R | T | S | U | R | F | N | H | Q |
+| **18** | Y | E | T | R | R | E | U | U | J | A | T | I | K | L | X | K | U | T |

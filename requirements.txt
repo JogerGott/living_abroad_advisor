@@ -1,0 +1,5 @@
+# Python requirements for Travel Helper utility scripts (e.g., download_screens.py)
+# Note: The main backend server runs on Node.js/TypeScript under the backend/ folder.
+
+requests>=2.31.0
+urllib3>=2.2.1
