@@ -193,13 +193,32 @@
 <!-- Main Content Canvas -->
 <main class="pt-24 pb-20 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
 <!-- Hero Section -->
-<section class="mb-16 text-center relative">
-<div class="absolute -top-10 -left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-<div class="absolute top-20 -right-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
-<h2 class="plusJakartaSans text-6xl md:text-[5rem] font-extrabold tracking-tighter text-on-surface mb-4">USA 🇺🇸</h2>
-<p class="beVietnamPro text-lg text-on-surface-variant max-w-2xl mx-auto opacity-80">
+<!-- Hero Section USA -->
+<section class="relative h-[614px] flex items-center justify-center overflow-hidden bg-surface-container mb-16 rounded-3xl">
+    <!-- Capa de Imagen de Fondo con Gradiente -->
+    <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover opacity-80" 
+            data-alt="cinematic wide shot of the Statue of Liberty and New York City skyline at dusk with warm golden sunset light" 
+            src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1920&q=80" />
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/20 via-slate-950/40 to-surface"></div>
+    </div>
+
+    <!-- Círculos de Resplandor Ambiental (Blur Ambient Elements) -->
+    <div class="absolute -top-10 -left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl z-0"></div>
+    <div class="absolute top-20 -right-20 w-80 h-80 bg-secondary/10 rounded-full blur-3xl z-0"></div>
+
+    <!-- Contenido Principal Centrado -->
+    <div class="relative z-10 text-center max-w-3xl px-6">
+        <span class="label-md text-secondary tracking-widest uppercase font-bold text-xs bg-white/60 dark:bg-slate-900/60 backdrop-blur-md px-4 py-1.5 rounded-full mb-4 inline-block shadow-sm">
+            Destination Spotlight
+        </span>
+        <h2 class="plusJakartaSans text-6xl md:text-[5rem] font-extrabold tracking-tighter text-white drop-shadow-md mb-4">
+            USA 🇺🇸
+        </h2>
+        <p class="beVietnamPro text-lg md:text-xl text-slate-100 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-sm opacity-90">
             Land of the free and the home of the brave. Discover the complexities, the giant portions, and the legendary hospitality of the United States.
         </p>
+    </div>
 </section>
 <!-- Culture Shocks Bento Grid -->
 <section class="mb-24">
@@ -252,224 +271,127 @@
 </section>
 
 <!--========================================================================================== -->
-        <!-- Culture Shock in Colombia Summary Section -->
+        <!-- Culture Shock in the U.S. Summary Section -->
         <section class="mb-24 py-12 px-8 bg-surface-container-low rounded-xl relative overflow-hidden">
             <div class="relative z-10 max-w-4xl mx-auto">
 
                 <!-- Section Header -->
                 <div class="text-center md:text-left mb-8 border-b border-on-surface/10 pb-6">
-                    <span
-                        class="beVietnamPro text-[0.75rem] font-bold text-secondary uppercase tracking-[0.2em] mb-2 block">Cultural
-                        Insights</span>
-                    <h3 class="plusJakartaSans text-3xl font-bold text-on-surface">Culture Shock in Colombia</h3>
-                    <p class="beVietnamPro text-sm text-on-surface-variant mt-2">What foreigners commonly notice when
-                        adjusting to Colombian daily life.</p>
+                    <span class="beVietnamPro text-[0.75rem] font-bold text-secondary uppercase tracking-[0.2em] mb-2 block">
+                        Academic & Social Transitions
+                    </span>
+                    <h3 class="plusJakartaSans text-3xl font-bold text-on-surface">Culture Shock in the U.S.</h3>
+                    <p class="beVietnamPro text-sm text-on-surface-variant mt-2">
+                        How international students experience and adapt to life and higher education in the United States.
+                    </p>
                 </div>
 
-                <!-- Quick Insights Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Quick Insights Grid (Se agrega mb-6 al contenedor para dar espacio antes del link) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 
-                    <!-- Card 1: Time & Pace -->
-                    <div
-                        class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
+                    <!-- Card 1: Symptoms -->
+                    <div class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
                         <div class="flex items-center gap-3 mb-3">
-                            <span class="material-symbols-outlined text-primary text-2xl"
-                                style="font-family: 'Material Symbols Outlined';">schedule</span>
-                            <h4 class="plusJakartaSans font-bold text-on-surface">Time & Pace of Life</h4>
+                            <span class="material-symbols-outlined text-primary text-2xl" style="font-family: 'Material Symbols Outlined';">sentiment_dissatisfied</span>
+                            <h4 class="plusJakartaSans font-bold text-on-surface">Emotional & Physical Symptoms</h4>
                         </div>
                         <p class="beVietnamPro text-sm text-on-surface-variant leading-relaxed">
-                            Social gatherings often run on <em>"tiempo colombiano"</em> (starting 30-60 mins late).
-                            While work and school demand punctuality, social life moves at a warm, relationship-centered
-                            pace.
+                            Following an initial <em>"honeymoon phase,"</em> students often face intense homesickness, loneliness, and stress. This emotional tension frequently manifests physically as fatigue, headaches, or social withdrawal.
                         </p>
                     </div>
 
-                    <!-- Card 2: Warm Greetings -->
-                    <div
-                        class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
+                    <!-- Card 2: Academic Expectations -->
+                    <div class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
                         <div class="flex items-center gap-3 mb-3">
-                            <span class="material-symbols-outlined text-primary text-2xl"
-                                style="font-family: 'Material Symbols Outlined';">group</span>
-                            <h4 class="plusJakartaSans font-bold text-on-surface">Warmth & Touch</h4>
+                            <span class="material-symbols-outlined text-primary text-2xl" style="font-family: 'Material Symbols Outlined';">school</span>
+                            <h4 class="plusJakartaSans font-bold text-on-surface">Academic Challenges</h4>
                         </div>
                         <p class="beVietnamPro text-sm text-on-surface-variant leading-relaxed">
-                            Greetings are highly physical and respectful. Standard handshakes quickly evolve into warm
-                            <em>abrazos</em> (hugs) or light cheek kisses once acquainted, accompanied by formal titles.
+                            U.S. classrooms emphasize open participation, critical discussion, and direct communication. Students from lecture-based systems often feel insecure or silent due to fear of language mistakes.
                         </p>
                     </div>
 
-                    <!-- Card 3: Business Culture -->
-                    <div
-                        class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
+                    <!-- Card 3: Social Dynamics -->
+                    <div class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
                         <div class="flex items-center gap-3 mb-3">
-                            <span class="material-symbols-outlined text-primary text-2xl"
-                                style="font-family: 'Material Symbols Outlined';">handshake</span>
-                            <h4 class="plusJakartaSans font-bold text-on-surface">Business & Hierarchy</h4>
+                            <span class="material-symbols-outlined text-primary text-2xl" style="font-family: 'Material Symbols Outlined';">forum</span>
+                            <h4 class="plusJakartaSans font-bold text-on-surface">Surface-Level Relations</h4>
                         </div>
                         <p class="beVietnamPro text-sm text-on-surface-variant leading-relaxed">
-                            Trust is built through initial small talk before diving into work. Decisions respect age and
-                            seniority, and communication is highly indirect to preserve social harmony.
+                            Initial interactions with domestic students are usually friendly but tend to remain superficial. Navigating unfamiliar jokes and cultural references can drive international students to isolate or seek comfort only with co-nationals.
                         </p>
                     </div>
 
-                    <!-- Card 4: Regional Diversity -->
-                    <div
-                        class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
+                    <!-- Card 4: Psychological Impact & Coping -->
+                    <div class="p-5 rounded-lg bg-surface/50 border border-on-surface/5 hover:border-primary/20 transition-all">
                         <div class="flex items-center gap-3 mb-3">
-                            <span class="material-symbols-outlined text-primary text-2xl"
-                                style="font-family: 'Material Symbols Outlined';">public</span>
-                            <h4 class="plusJakartaSans font-bold text-on-surface">Regional Differences</h4>
+                            <span class="material-symbols-outlined text-primary text-2xl" style="font-family: 'Material Symbols Outlined';">psychology</span>
+                            <h4 class="plusJakartaSans font-bold text-on-surface">Identity & Resilience</h4>
                         </div>
                         <p class="beVietnamPro text-sm text-on-surface-variant leading-relaxed">
-                            Colombia is culturally diverse. Bogotanos are more formal and reserved; Paisas show proud
-                            entrepreneurial drive; while Coastal regions reflect an animated, open Caribbean rhythm.
+                            Students often negotiate an identity crisis, feeling like outsiders in both cultures. However, by balancing home connections, joining campus activities, and utilizing institutional support, they build lasting intercultural competence.
                         </p>
                     </div>
 
                 </div>
 
                 <!-- Document Link / Call to Action -->
-                <div
-                    class="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 rounded-lg bg-primary/10 border border-primary/20">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 rounded-lg bg-primary/10 border border-primary/20">
                     <div class="flex items-center gap-4 text-center sm:text-left">
-                        <span class="material-symbols-outlined text-primary text-3xl hidden sm:block"
-                            style="font-family: 'Material Symbols Outlined';">description</span>
+                        <span class="material-symbols-outlined text-primary text-3xl hidden sm:block" style="font-family: 'Material Symbols Outlined';">description</span>
                         <div>
-                            <h5 class="plusJakartaSans font-bold text-on-surface">Want the complete cultural breakdown?
-                            </h5>
-                            <p class="beVietnamPro text-xs text-on-surface-variant">Read the full research paper
-                                covering gastronomy, daily schedules, and detailed cultural tips.</p>
+                            <h5 class="plusJakartaSans font-bold text-on-surface">Want the complete cultural breakdown?</h5>
+                            <p class="beVietnamPro text-xs text-on-surface-variant">
+                                Read the full research paper covering academic expectations, psychological adaptation, and support strategies.
+                            </p>
                         </div>
                     </div>
 
                     <!-- REPLACE THE href VALUE IN THE BUTTON BELOW WITH YOUR ACTUAL URL -->
-                    <a href="https://drive.google.com/file/d/18QBh0ytLRduDpmyUUfmKz8IhMuacdGWV/view?usp=sharing"
-                        target="_blank" rel="noopener noreferrer"
-                        class="beVietnamPro text-sm font-bold bg-primary text-on-primary py-3 px-6 rounded-lg hover:bg-primary-hover transition-colors flex items-center gap-2 shadow-sm whitespace-nowrap">
+                    <a href="https://drive.google.com/file/d/1qHGya-KE6SvF2gwDhp79uRR8ZI2kPLeo/view?usp=sharing" 
+                    target="_blank" rel="noopener noreferrer" 
+                    class="beVietnamPro text-sm font-bold bg-primary text-on-primary py-3 px-6 rounded-lg hover:bg-primary-hover transition-colors flex items-center gap-2 shadow-sm whitespace-nowrap">
                         <span>Read Full Research</span>
-                        <span class="material-symbols-outlined text-sm"
-                            style="font-family: 'Material Symbols Outlined';">open_in_new</span>
+                        <span class="material-symbols-outlined text-sm" style="font-family: 'Material Symbols Outlined';">open_in_new</span>
                     </a>
                 </div>
 
             </div>
             <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent pointer-events-none"></div>
         </section>
-        <!--========================================================================================== -->
+<!--========================================================================================== -->
 
 
+<!--================================================================================================================== -->
 <!-- Video Carousel Section (Advices and Experiences) -->
-<section class="mb-24">
-<div class="flex items-center justify-between mb-10">
-<div class="flex flex-col">
-<span class="beVietnamPro text-[0.75rem] font-bold text-secondary uppercase tracking-[0.2em] mb-1">Advices and Experiences</span>
-<h3 class="plusJakartaSans text-4xl font-extrabold tracking-tight text-on-surface">See It In Action</h3>
-</div>
-<div class="flex gap-4">
-<button class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-<span class="material-symbols-outlined">arrow_back</span>
-</button>
-<button class="w-12 h-12 rounded-full bg-surface-container-high text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-<span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</div>
-</div>
-<div class="flex gap-8 overflow-x-auto pb-10 scrollbar-hide snap-x">
-<!-- Video Card 1 -->
-<div class="min-w-[320px] md:min-w-[450px] snap-center">
-<div class="relative overflow-hidden rounded-xl mb-6 shadow-lg aspect-video bg-black">
-<video class="w-full h-full object-cover" controls preload="metadata">
-<source src="../videos/IMG_1705.MOV" type="video/quicktime">
-<source src="../videos/IMG_1705.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-</div>
-<h5 class="plusJakartaSans font-bold text-xl mb-2">NYC First Impressions</h5>
-<p class="beVietnamPro text-sm text-on-surface-variant opacity-70">Exploring the concrete jungle of Manhattan.</p>
-</div>
-<!-- Video Card 2 -->
-<div class="min-w-[320px] md:min-w-[450px] snap-center">
-<div class="relative overflow-hidden rounded-xl mb-6 shadow-lg aspect-video bg-black">
-<video class="w-full h-full object-cover" controls preload="metadata">
-<source src="../videos/IMG_1706.MOV" type="video/quicktime">
-<source src="../videos/IMG_1706.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-</div>
-<h5 class="plusJakartaSans font-bold text-xl mb-2">The West Coast Roadtrip</h5>
-<p class="beVietnamPro text-sm text-on-surface-variant opacity-70">Deserts, mountains, and the Pacific Coast Highway.</p>
-</div>
-<!-- Video Card 3 -->
-<div class="min-w-[320px] md:min-w-[450px] snap-center">
-<div class="relative overflow-hidden rounded-xl mb-6 shadow-lg aspect-video bg-black">
-<video class="w-full h-full object-cover" controls preload="metadata">
-<source src="../videos/IMG_1707.MOV" type="video/quicktime">
-<source src="../videos/IMG_1707.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-</div>
-<h5 class="plusJakartaSans font-bold text-xl mb-2">American Food Tour</h5>
-<p class="beVietnamPro text-sm text-on-surface-variant opacity-70">Barbecue, Burgers, and Big Portions.</p>
-</div>
-</div>
-</section>
+
+
+<!-- Carousel Container (Displays one by one) -->
+
+
+<!-- Logic to drive the Slider buttons -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carousel = document.getElementById('videoCarousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        if (carousel && prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                const itemWidth = carousel.clientWidth;
+                carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const itemWidth = carousel.clientWidth;
+                carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+            });
+        }
+    });
+</script>
 
 <!-- Local Voices Section (Audio Players) -->
-<section class="py-20 px-6 md:px-12 bg-surface-container-low border-t border-outline-variant/10 mb-24 rounded-xl">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <span class="text-secondary font-bold text-[0.75rem] uppercase tracking-widest block mb-2">Listen & Learn</span>
-            <h2 class="text-3xl md:text-5xl font-extrabold plusJakartaSans">Advices from Locals</h2>
-            <p class="mt-4 text-on-surface-variant max-w-2xl mx-auto">Hear authentic tips and pronunciation directly from our local guides.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Male Character Card -->
-            <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-lg border border-outline-variant/10 flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl transition-all duration-300">
-                <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-2 border-primary/20 bg-primary/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary text-5xl">face</span>
-                </div>
-                <div class="flex-1 w-full">
-                    <div class="flex items-center justify-between mb-2">
-                        <div>
-                            <h4 class="font-bold text-lg text-on-surface">Mateo</h4>
-                            <span class="text-xs text-primary font-bold uppercase tracking-wider">Local Advisor</span>
-                        </div>
-                        <span class="text-xs text-on-surface-variant italic">Accent: Local</span>
-                    </div>
-                    <p class="text-sm text-on-surface-variant mb-4">"Keep an ear out for daily slang expressions—they are the key to connecting."</p>
-                    <audio class="w-full h-8 rounded-lg" controls>
-                        <source src="../audio/New%20Recording%206.m4a" type="audio/x-m4a">
-                        <source src="../audio/New%20Recording%206.m4a" type="audio/mp4">
-                        <source src="../audio/New%20Recording%206.m4a" type="audio/aac">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-            </div>
-            <!-- Female Character Card -->
-            <div class="bg-surface-container-lowest p-6 rounded-2xl shadow-lg border border-outline-variant/10 flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl transition-all duration-300">
-                <div class="w-24 h-24 rounded-full overflow-hidden shrink-0 border-2 border-secondary/20 bg-secondary/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-secondary text-5xl">face_3</span>
-                </div>
-                <div class="flex-1 w-full">
-                    <div class="flex items-center justify-between mb-2">
-                        <div>
-                            <h4 class="font-bold text-lg text-on-surface">Sofia</h4>
-                            <span class="text-xs text-secondary font-bold uppercase tracking-wider">Local Advisor</span>
-                        </div>
-                        <span class="text-xs text-on-surface-variant italic">Accent: Local</span>
-                    </div>
-                    <p class="text-sm text-on-surface-variant mb-4">"Don't worry too much about making mistakes. People appreciate the effort!"</p>
-                    <audio class="w-full h-8 rounded-lg" controls>
-                        <source src="../audio/New%20Recording%207.m4a" type="audio/x-m4a">
-                        <source src="../audio/New%20Recording%207.m4a" type="audio/mp4">
-                        <source src="../audio/New%20Recording%207.m4a" type="audio/aac">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
         <!--========================================================================================== -->
         <!-- Mini-Games Interactive Section -->
@@ -494,21 +416,25 @@ Your browser does not support the video tag.
                         class="flex flex-col bg-surface/40 border border-on-surface/5 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all group">
                         <!-- Game Image Container -->
                         <div class="h-48 overflow-hidden bg-surface relative">
-                            <img src="../game/pics/shock-snake.jpeg" alt="snake and ladders game"
+                            <img src="../game/pics/shock-snake.jpg" alt="snake and ladders game"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                             <span
-                                class="absolute top-3 right-3 bg-primary text-on-primary text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Time
-                                Strategy</span>
+                                class="absolute top-3 right-3 bg-primary text-on-primary text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider"> Snake-Ladd</span>
                         </div>
                         <!-- Content Space -->
                         <div class="p-6 flex flex-col flex-1">
-                            <h4 class="plusJakartaSans font-bold text-xl text-on-surface mb-2">The 'Shock-Snake and Ladders'
+                            <h4 class="plusJakartaSans font-bold text-xl text-on-surface mb-2">The 'Shock-Snake and
+                                Ladders'
                                 Challenge</h4>
                             <p class="beVietnamPro text-sm text-on-surface-variant leading-relaxed mb-6 flex-1">
-                                Are you ready for the ultimate challenge? The classic Snakes and Ladders is back, reimagined in the Mario Party universe. 
-                                The goal is simple but full of adrenaline: the first player to cross the finish line wins! Along the way, 
-                                the iconic green pipes will serve as ladders to help you climb up the board, but stay alert—piranha plants are lurking, ready to make you fall. 
-                                Plus, the question squares will challenge you with some questions related to the “culture shock” module. Let the game begin, and may luck be on your side!
+                                Are you ready for the ultimate challenge? The classic Snakes and Ladders is back,
+                                reimagined in the Mario Party universe.
+                                The goal is simple but full of adrenaline: the first player to cross the finish line
+                                wins! Along the way,
+                                the iconic green pipes will serve as ladders to help you climb up the board, but stay
+                                alert—piranha plants are lurking, ready to make you fall.
+                                Plus, the question squares will challenge you with some questions related to the
+                                “culture shock” module. Let the game begin, and may luck be on your side!
                             </p>
                             <!-- Redirect Link (REPLACE YOUR_GAME_1_URL) -->
                             <a href="https://www.canva.com/design/DAHPHuzrCPk/yGGbcd_6e03q5qXxN5r6_w/edit"
@@ -525,21 +451,20 @@ Your browser does not support the video tag.
                         class="flex flex-col bg-surface/40 border border-on-surface/5 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all group">
                         <!-- Game Image Container -->
                         <div class="h-48 overflow-hidden bg-surface relative">
-                            <img src="game/pics/game2.jpg" alt="Greeting etiquette simulator screenshot"
+                            <img src="../game/pics/Crossword.png" alt="Greeting etiquette simulator screenshot"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                             <span
-                                class="absolute top-3 right-3 bg-secondary text-on-secondary text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Etiquette
-                                Sim</span>
+                                class="absolute top-3 right-3 bg-secondary text-on-secondary text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Crossword</span>
                         </div>
                         <!-- Content Space -->
                         <div class="p-6 flex flex-col flex-1">
-                            <h4 class="plusJakartaSans font-bold text-xl text-on-surface mb-2">The Perfect Abrazo</h4>
+                            <h4 class="plusJakartaSans font-bold text-xl text-on-surface mb-2">France Crossword</h4>
                             <p class="beVietnamPro text-sm text-on-surface-variant leading-relaxed mb-6 flex-1">
-                                Test your fast reflexes and greeting etiquette! Choose between formal handshakes, warm
-                                hugs, or right-cheek kisses depending on context, professional rank, and proximity.
+                            Do you think you know French etiquette? Challenge your friends (or yourself) at this cultural crossroads. 
+                            Discover the secrets behind France in this language learning adventure, dare to solve the culture shock and master essential vocabulary!
                             </p>
                             <!-- Redirect Link (REPLACE YOUR_GAME_2_URL) -->
-                            <a href="YOUR_GAME_2_URL_HERE"
+                            <a href="https://shorturl.at/DORZk"
                                 class="beVietnamPro text-sm font-bold bg-primary text-on-primary text-center py-3 px-4 rounded-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2">
                                 <span>Play Game</span>
                                 <span class="material-symbols-outlined text-sm"
@@ -553,23 +478,22 @@ Your browser does not support the video tag.
                         class="flex flex-col bg-surface/40 border border-on-surface/5 rounded-xl overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all group">
                         <!-- Game Image Container -->
                         <div class="h-48 overflow-hidden bg-surface relative">
-                            <img src="game/pics/game3.jpg" alt="Gastronomy chef arcade game screenshot"
+                            <img src="../game/pics/2survival_culture_shock.png" alt="Escape the Culture Shock game screenshot"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                             <span
-                                class="absolute top-3 right-3 bg-tertiary text-on-tertiary text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Trivia
-                                Match</span>
+                                class="absolute top-3 right-3 bg-tertiary text-on-tertiary text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Word
+                                Search</span>
                         </div>
                         <!-- Content Space -->
                         <div class="p-6 flex flex-col flex-1">
-                            <h4 class="plusJakartaSans font-bold text-xl text-on-surface mb-2">Regional Plate Catcher
+                            <h4 class="plusJakartaSans font-bold text-xl text-on-surface mb-2">Escape the Culture Shock
                             </h4>
                             <p class="beVietnamPro text-sm text-on-surface-variant leading-relaxed mb-6 flex-1">
-                                An arcade-style trivia puzzle where you map traditional dishes to their correct
-                                geographic origins. Don't catch an Ajiaco over the Caribbean or mix up your Arepa
-                                regional toppings!
+                                A Python/Pygame word search adventure! Find hidden cultural words, complete situational
+                                missions, survive surprise events, and pass the final migration interview.
                             </p>
-                            <!-- Redirect Link (REPLACE YOUR_GAME_3_URL) -->
-                            <a href="YOUR_GAME_3_URL_HERE"
+                            <!-- Redirect Link to Wasm Game -->
+                            <a href="../real_game/build/web/index.html"
                                 class="beVietnamPro text-sm font-bold bg-primary text-on-primary text-center py-3 px-4 rounded-lg hover:bg-primary-hover transition-colors flex items-center justify-center gap-2">
                                 <span>Play Game</span>
                                 <span class="material-symbols-outlined text-sm"
@@ -585,11 +509,12 @@ Your browser does not support the video tag.
         </section>
         <!--========================================================================================== -->
 
+
 <!-- Slang Grid Section -->
 <section class="mb-24">
 <div class="text-center mb-16">
 <span class="beVietnamPro text-[0.75rem] font-bold text-tertiary uppercase tracking-[0.2em] mb-4 block">Speak like a local</span>
-<h3 class="plusJakartaSans text-4xl md:text-5xl font-extrabold text-on-surface mb-6">American Slang 101</h3>
+<h3 class="plusJakartaSans text-4xl md:text-5xl font-extrabold text-on-surface mb-6">American Slang</h3>
 <div class="h-1 w-24 bg-primary mx-auto rounded-full"></div>
 </div>
 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
